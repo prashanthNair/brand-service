@@ -1,12 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import { format } from "path";
 import { AuthController } from "../controllers/authController"; 
+import { ProductController } from "../controllers/productController"; 
 
 
 
 const authRoutes = (
   app,
-  authController: AuthController = AuthController.getInstance(), 
+  authController: AuthController = AuthController.getInstance(),
+  productController: ProductController = ProductController.getInstance(), 
 ) => { 
 
 /**
@@ -201,6 +203,34 @@ const authRoutes = (
     .put(
       async (req: Request, res: Response, next: NextFunction) =>
         await authController.update(req, res, next)
+    );
+    /**
+ * @swagger
+ * /api/v1/auth/product:
+ *   post:
+ *     summary: Add a product.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Product'
+ *     responses:
+ *       201:
+ *         description: Product Added successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/SuccessResponse'
+ *       500:
+ *         $ref: '#/components/responses/FailureError'
+ *                 
+*/
+  app
+    .route("/api/v1/auth/product")
+    .post(
+      async (req: Request, res: Response, next: NextFunction) =>
+        await productController.postProduct(req, res, next)
     );
 };
 
