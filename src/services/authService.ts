@@ -69,7 +69,6 @@ class AuthService implements IAuthService {
         "SELECT email from user where email = ? ",
         email
       );
-
       return <User>rows;
     } catch (error) {
       return null;
