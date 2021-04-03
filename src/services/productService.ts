@@ -16,35 +16,38 @@ class ProductService implements IProductService {
 
   public async postProduct(productData: Product): Promise<Product> {
     try {
-      let product: Product = {
-        Name: productData.Name,
-        Category: productData.Category,
-        Type:productData.Type,
-        Brand: productData.Brand,
-        Currency: productData.Currency,
-        Description: productData.Description,
-        SellingPrice: productData.SellingPrice,
-        GST: productData.GST,
-        MRP:productData.MRP,
-        Created_date: productData.Created_date,
-        ActualPrice: productData.ActualPrice,
-        BusinessId:productData.BusinessId
-      };
+
+      // let product: Product = {
+      //   BusinessDomain:productData.BusinessDomain,
+      //   Type:productData.Type,
+      //   Name: productData.Name,
+      //   Category: productData.Category,
+      //   Brand: productData.Brand, 
+      //   BrandId:productData.BrandId,
+      //   AvailableIn:productData.AvailableIn,
+      //   AvailableInUrl:productData.AvailableInUrl,
+      //   IsPaid:productData.IsPaid,
+      //   Plans:productData.Plans,
+      //   Features:productData.Features,
+      //   Images:productData.Images,
+      //   DefaultImageUrl:productData.DefaultImageUrl,
+      //   Description:productData.Description,
+      //   Discount:productData.Discount,
+      //   BuddyMargin:productData.BuddyMargin,
+      //   CommonMargin:productData.CommonMargin,
+      //   Currency: productData.Currency, 
+      //   SellingPrice: productData.SellingPrice,
+      //   ActualPrice:productData.ActualPrice
+      //       };
   
       let sql = `CALL PostProduct(?,?,?,?,?,?,?,?,?,?,?,?)`;
       let result = await db.query(sql, [
-        product.Name,
-        product.Category,
-        product.Type,
-        product.Brand,
-        product.Currency,
-        product.Description,
-        product.SellingPrice,
-        product.GST,
-        product.MRP,
-        product.Created_date,
-        product.ActualPrice,
-        product.BusinessId
+        productData.Name,
+        productData.Category,
+        productData.Type,
+        productData.Brand,
+        productData.Currency,
+        productData.Description
       ]);
       console.log(result);
       return result;

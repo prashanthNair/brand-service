@@ -11,7 +11,7 @@ export class HttpResponseMessage {
      * @param  {object}   res
      */
 
-    public static successResponse(res: Response, message: string) { 
+    public static successResponse(res: any, message: string) { 
         let resData = new HttpResponse();
         resData = { success: true, status: 1, message, data: [] };
         Logger.error(resData.message);
@@ -26,7 +26,7 @@ export class HttpResponseMessage {
      * @param  {object}   data
      */
     
-    public static async successResponseWithData(res: Response, message: string, data: object) {
+    public static async successResponseWithData(res: any, message: string, data: object) {
 
         let resData = new HttpResponse();
         resData = { success: true, status: 1, message, data };  
@@ -41,7 +41,7 @@ export class HttpResponseMessage {
      * @param  {string}   message
      */
 
-    public static sendErrorResponse(res: Response, message: string,error?:any) {
+    public static sendErrorResponse(res: any, message: string,error?:any) {
 
         let resData = new HttpResponse();
         
