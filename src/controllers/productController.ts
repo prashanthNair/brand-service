@@ -1,5 +1,4 @@
-import { NextFunction } from "express";
-import { Product } from "../models/product";
+import { Request, Response, NextFunction } from "express"; 
 import { IProductService } from "../services/IProductService";
 import { ProductService } from "../services/productService";
 import { HttpResponseMessage } from "../utils/httpResponseMessage";
@@ -27,14 +26,14 @@ export class ProductController {
     }
 
     
-  async postProduct(req: Request, res: Response, next: NextFunction){
+  async postProduct(req: Request, res: Response){
 
     let productInputModel=req.body;
 
     const result = await this.productService.postUser(productInputModel);
 
       if (!result.error) {
-        HttpResponseMessage.successResponse(res, "Sucessfull");
+        HttpResponseMessage.successResponse(res,result, "Sucessfull");
       } else {
         HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
       }

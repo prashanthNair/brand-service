@@ -1,4 +1,4 @@
-export class SignupDetails { 
+export class BrandRegisterModel { 
     DomainID:string;
     CategoryId:string;
     Category:string; 
@@ -25,6 +25,8 @@ export class SignupDetails {
   export class BankDetails {
      
   }
+
+  
 
 
   

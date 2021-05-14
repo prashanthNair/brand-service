@@ -1,7 +1,7 @@
 import authRoutes from "../routes/auth";  
-import signupRoutes from "../routes/signup";    
+import { brandRoutes } from "../routes/brand"; 
 
 export default function registerRoutes( app ) { 
     authRoutes(app)  
-    signupRoutes(app)
+    brandRoutes(app)
 }
