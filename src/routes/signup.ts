@@ -10,10 +10,15 @@ const signupRoutes = (
 
 /**
  * @swagger
- * /:
- *   get:
- *     summary: Signup Page.
- *        
+ * /brand/registration:
+ *   post:
+ *     summary: Brand Registraion.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Brand'   
  *     responses:
  *       201:
  *         description: Signup Page successfully retrieved        
@@ -26,7 +31,7 @@ const signupRoutes = (
 */
 
   app
-    .route("/api/v1/registration")
+    .route("/api/v1/brand/registration")
     .post(
        async (req: Request, res: Response, next: NextFunction) =>
        await signupController.postSignup(req, res, next)

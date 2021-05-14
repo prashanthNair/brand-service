@@ -2,7 +2,7 @@ import { SignupDetails } from "../models/sign_up";
 import { ISignupService } from "./ISignupService";
 import { db } from "../configuration/db.config";
 
-class SignupService implements ISignupService{
+class SignupService implements ISignupService {
 
   private static instance: ISignupService = null;
 
@@ -13,42 +13,39 @@ class SignupService implements ISignupService{
     return SignupService.instance;
   }
   public async postSignup(signupData: SignupDetails): Promise<SignupDetails> {
-    try{
-      let signup: SignupDetails = {
-       BrandType: signupData.BrandType,
-       BrandName: signupData.BrandName,
-       BrandCategory: signupData.BrandCategory,
-       BrandSubCategory: signupData.BrandSubCategory,
-       BusinessName: signupData.BusinessName,
-       RegistrationType: signupData.RegistrationType,
-       Kyc: signupData.Kyc,
-       AuthPersonName: signupData.AuthPersonName,
-       Designation: signupData.Designation,
-       PhoneNumber: signupData.PhoneNumber,
-       Email: signupData.Email,
-       Password: signupData.Password,
-       ConfPassword:signupData.ConfPassword
-      };
-  throw new Error("Service method not implemented!")
-      // let sql = `CALL PostSignup(?,?,?,?,?,?,?,?,?,?)`;
-      // let result = await db.query(sql, [
-      //   signup.BrandName,
-      //   signup.BrandCategory,
-      //   signup.BrandSubCategory,
-      //   signup.BusinessName,
-      //   signup.RegistrationType,
-      //   signup.Kyc,
-      //   signup.AuthPersonName,
-      //   signup.Designation,
-      //   signup.PhoneNumber,
-      //   signup.Email,
-      //   signup.Password,
-      //   signup.ConfPassword,
-      // ]);
-      // console.log(result);
-      // return result;
+    try {
 
-    }catch (err) {
+      let sql = `CALL Insert_Brand(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+      let result = await db.query(sql, [
+        signupData.DomainID,
+        signupData.CategoryId,
+        signupData.Category,
+        signupData.BrandName,
+        signupData.About,
+        signupData.Country,
+        signupData.EmailId,
+        signupData.PhoneNumber,
+        signupData.CountryCode,
+        signupData.Street,
+        signupData.City,
+        signupData.State,
+        signupData.PostalCode,
+        signupData.UserName,
+        signupData.Designation,
+        signupData.UserEmailId,
+        signupData.RegBusinessName,
+        signupData.RegisteredType,
+        signupData.AccountPassword
+      ],
+        (error, results, fields) => {
+          if (error) {
+            return error;
+          }
+          console.log(results);
+        }); 
+      return result;
+
+    } catch (err) {
       return err;
     }
   }

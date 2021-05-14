@@ -2,40 +2,71 @@
  * @swagger
  *  components:
  *    schemas:
- *      User:
+ *      Brand:
  *        type: object
  *        properties:
- *          userName:
+ *          BrandId:
  *            type: string
  *            description: User name for the user, needs to be unique
- *          firstName:
+ *          DomainId:
  *            type: string
  *            description: First name of the user
- *          lastName:
+ *          CategoryId:
  *            type: string
  *            description: Last name of the user
- *          password:
+ *          Category:
  *            type: string
  *            description: Password for the user account
- *          location:
+ *          BrandName:
  *            type: string
  *            description: Current location of the user
- *          profilePic:
+ *          About:
  *            type: string
  *            description: Current Picture
- *          state:
+ *          Country:
  *            type: string
  *            description: Residing state of the user
- *          country:
+ *          EmailId:
  *            type: string
  *            description: Residing country of the user
- *          email:
- *            type: string
+ *          PhoneNumber:
+ *            type: integer
  *            description: Email ID of the user
  *            format: email
- *          mobileNum:
- *            type: integer
+ *          CountryCode:
+ *            type: string
  *            description: Mobile number of the user
+ *          Street:
+ *            type: string
+ *            description: Mobile number of the user
+ *          City:
+ *            type: string
+ *            description: Mobile number of the user
+ *          State:
+ *            type: string
+ *            description: Mobile number of the user
+ *          PostalCode:
+ *            type: string
+ *            description: Mobile number of the user
+ *          UserName:
+ *            type: string
+ *            description: Mobile number of the user
+ *          Designation:
+ *            type: string
+ *            description: Mobile number of the user
+ *          UserEmailId:
+ *            type: string
+ *            description: Mobile number of the user
+ *          RegBusinessName:
+ *            type: string
+ *            description: Mobile number of the user
+ *          RegisteredType:
+ *            type: string
+ *            description: Mobile number of the user
+ *          AccountPassword:
+ *            type: string
+ *            description: Mobile number of the user
+ *
  */
 
 /**
