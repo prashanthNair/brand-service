@@ -1,7 +1,8 @@
+import { BrandRegisterModel } from "../models/brandRegisterModel";
 
 export interface IBrandService{
 
-    register(brandInput:any);
+     register(brandRegisterModel: BrandRegisterModel): Promise<Object>
     
 
 }
