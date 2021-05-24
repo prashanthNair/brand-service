@@ -1,5 +1,5 @@
 import validator from 'validator';
-import { BrandSubscription, GetBrandSubscription } from '../models/subscription';
+import { PostBrandSubscription, UpdateBrandSubscription } from '../models/subscription';
 import { isEmpty } from './isEmpty';
 import { ISubscriptionValidation } from './ISubscriptionValidation';
 
@@ -14,23 +14,18 @@ class SubscriptionValidation implements ISubscriptionValidation{
         return SubscriptionValidation.instance;
     }
 
-
-    public getSubscriptions(data): object {
-        return {}
-    }
-
-    public getBrandSubscriptions(data: GetBrandSubscription): object{
+    public getBrandSubscriptions(data: Object): object{
         let error = {};
 
-        if(isEmpty(data.brandId)) error["brandId"] = "brandId required";
-        if(typeof(data.brandId) !== "string") error["brandId"] = "brandId must be of type string";
+        if(isEmpty(data["brandId"])) error["brandId"] = "brandId required";
+        if(typeof(data["brandId"]) !== "string") error["brandId"] = "brandId must be of type string";
 
         let isError = !isEmpty(error);
 
         return {error, isError};
     }
 
-    public postBrandSubscription(data: BrandSubscription): object{
+    public postBrandSubscription(data: PostBrandSubscription): object{
 
         let error = {};
 
@@ -40,14 +35,11 @@ class SubscriptionValidation implements ISubscriptionValidation{
         if(isEmpty(data.subscriptionId)) error["subscriptionId"] = "subscriptionId is required";
         if(typeof(data.subscriptionId) !== "string") error["subscriptionId"]= "subscriptionId must be of type string";
 
-        if(isEmpty(data.subscriptionStatus)) error["subscriptionStatus"] = "subscriptionStatus is required"
-        if(data.subscriptionStatus !== "ACTIVE" && data.subscriptionStatus !== "INACTIVE") error["subscriptionStatus"] = "subscriptionStatus should be either ACTIVE/INACTIVE";
-    
         let isError = !isEmpty(error);
         return {error, isError};
     }
     
-    public updateBrandSubscription(data: BrandSubscription): object{
+    public updateBrandSubscription(data: UpdateBrandSubscription): object{
 
         let error = {};
 

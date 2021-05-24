@@ -1,7 +1,7 @@
-import { BrandSubscription } from "../models/subscription";
+import { PostBrandSubscription, UpdateBrandSubscription } from "../models/subscription";
 
 export interface ISubscriptionService {
-    getSubscriptions({}): any,
-    postBrandSubscription(brandSubData: BrandSubscription): Promise<any>,
-    updateBrandSubscription(brandSubData: BrandSubscription): Promise<any>
+    getBrandSubscriptions(brandId: string): Promise<any>,
+    postBrandSubscription(brandSubData: PostBrandSubscription): Promise<any>,
+    updateBrandSubscription(brandSubData: UpdateBrandSubscription): Promise<any>
 }

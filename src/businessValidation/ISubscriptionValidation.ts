@@ -1,3 +1,3 @@
 export interface ISubscriptionValidation{
-    getSubscriptions(data: object): object
+    getBrandSubscriptions(data: object): object
 }

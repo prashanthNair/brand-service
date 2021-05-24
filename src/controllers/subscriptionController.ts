@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { ISubscriptionValidation } from "../businessValidation/ISubscriptionValidation";
 import { SubscriptionValidation } from "../businessValidation/subscriptionValidation";
-import { BrandSubscription, GetBrandSubscription } from "../models/subscription";
+import { PostBrandSubscription, UpdateBrandSubscription } from "../models/subscription";
 import { ISubscriptionService } from "../services/ISubscriptionService";
 import { SubscriptionService } from "../services/subscriptionService";
 import { HttpResponseMessage } from "../utils/httpResponseMessage";
@@ -30,46 +30,46 @@ class SubscriptionController {
         return SubscriptionController.instance;
     }
 
-    public getSubscriptions(req: Request, res: Response, next: NextFunction) {
+    public getBrandSubscriptions(req: Request, res: Response, next: NextFunction) {
 
-        let { error, isError } = this.validationService.getBrandSubscriptions(req.body);
+        let { error, isError } = this.validationService.getBrandSubscriptions(req.params);
 
-        if (error) {
+        if (isError) {
             HttpResponseMessage.validationErrorWithData(res, "input validation error", error)
         }
         else {
 
-            let brandId: GetBrandSubscription= req.body.brandId;
-            let result = this.subscriptionService.getSubscriptions(brandId);
-
-            if (result) {
-                HttpResponseMessage.successResponse(res, "Sucessfull");
-            } else {
-                HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
-            }
+            let brandId: string = req.params.brandId;
+            this.subscriptionService.getBrandSubscriptions(brandId)
+                .then(result => {
+                    let _res = result[0][0];
+                    HttpResponseMessage.successResponseWithData(res, "Sucessfull", _res);
+                })
+                .catch(err => {
+                    HttpResponseMessage.sendErrorResponse(res, "Transaction Failed", error.message);
+                });
         }
     }
 
     public postBrandSubscription(req: Request, res: Response, next: NextFunction){
-        let {error, isError} = this.validationService.postBrandSubscription(req.body);
+        let {error, isError} = this.validationService.postBrandSubscription({...req.params, ...req.body});
 
         if(isError){
             HttpResponseMessage.validationErrorWithData(res, "input validation error", error)
         }else{
-            let brandSubData: BrandSubscription = {
-                brandId: req.body.brandId,
-                subscriptionId: req.body.subscriptionId,
-                subscriptionStatus: req.body.subscriptionStatus
+            let brandSubData: PostBrandSubscription = {
+                brandId: req.params.brandId,
+                subscriptionId: req.body.subscriptionId
             };
 
-            let result = this.subscriptionService.postBrandSubscription(brandSubData)
-            if (result) {
-                HttpResponseMessage.successResponse(res, "Sucessfull");
-            } else {
-                HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
-            }
-        }
+            this.subscriptionService.postBrandSubscription(brandSubData)
+                .then(result => {
+                    HttpResponseMessage.successResponse(res, "Sucessfull");
+                }).catch(err => {
+                    HttpResponseMessage.sendErrorResponse(res, "Transaction Failed", err.message);
+                });
     }
+}
 
     public updateBrandSubscription(req: Request, res: Response, next: NextFunction){
         let {error, isError} = this.validationService.updateBrandSubscription({...req.body, ...req.params});
@@ -77,18 +77,18 @@ class SubscriptionController {
         if(isError){
             HttpResponseMessage.validationErrorWithData(res, "input validation error", error)
         }else{
-            let brandSubData: BrandSubscription = {
+            let brandSubData: UpdateBrandSubscription = {
                 brandId: req.params.brandId,
-                subscriptionId: req.body.subscriptionId,
+                subscriptionId: req.params.subscriptionId,
                 subscriptionStatus: req.body.subscriptionStatus
             };
 
-            let result = this.subscriptionService.updateBrandSubscription(brandSubData)
-            if (result) {
-                HttpResponseMessage.successResponse(res, "Sucessfull");
-            } else {
-                HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
-            }
+            this.subscriptionService.updateBrandSubscription(brandSubData)
+                .then(result => {
+                    HttpResponseMessage.successResponse(res, "Sucessfull");
+                }).catch(err => {
+                    HttpResponseMessage.sendErrorResponse(res, "Transaction Failed", error.message);
+                });
         }
     }
 }

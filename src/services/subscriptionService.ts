@@ -1,5 +1,5 @@
 import { db } from '../configuration/db.config';
-import { BrandSubscription, GetBrandSubscription } from '../models/subscription';
+import { PostBrandSubscription } from '../models/subscription';
 import { ISubscriptionService } from './ISubscriptionService';
 
 
@@ -15,46 +15,25 @@ class SubscriptionService implements ISubscriptionService{
         return this.instance;
     }
 
-    public async getSubscriptions(brandId: GetBrandSubscription): Promise<any>{
-        try{
+    public async getBrandSubscriptions(brandId: string): Promise<any> {
 
-            let sql = `CALL Getbrandsubscription(?)`;
-            let result = await db.query(sql, [brandId]);
+        let sql = `CALL Getbrandsubscription(?)`;
+        return db.query(sql, [brandId]);
 
-            return result;
-        }
-        catch(err) {
-            console.log(err);
-            return null;
-        }
     }
 
-    public async postBrandSubscription(brandSubData: BrandSubscription): Promise<any>{
-        try{
+    public postBrandSubscription(brandSubData: PostBrandSubscription): Promise<any>{
 
             let sql = `CALL Insertbrandsubscription(?,?,?)`;
-            let result = await db.query(sql, Object.values(brandSubData));
+            return db.query(sql, Object.values(brandSubData));
 
-            return "result";
-        }
-        catch(err) {
-            console.log(err);
-            return null;
-        }
     }
 
-    public async updateBrandSubscription(brandSubData: BrandSubscription):Promise<any>{
-        try{
+    public updateBrandSubscription(brandSubData: PostBrandSubscription): Promise<any> {
 
-            let sql = `CALL Updatebrandsubscription(?,?,?)`;
-            let result = await db.query(sql, Object.values(brandSubData));
+        let sql = `CALL Updatebrandsubscription(?,?,?)`;
+        return db.query(sql, Object.values(brandSubData));
 
-            return result;
-        }
-        catch(err) {
-            console.log(err);
-            return null;
-        }
     }
 }
 

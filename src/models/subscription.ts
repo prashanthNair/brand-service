@@ -2,12 +2,13 @@ export class subscription{
     
 }
 
-export class BrandSubscription{
+export class PostBrandSubscription{
     brandId: string;
     subscriptionId: string;
-    subscriptionStatus: string
 }
 
-export class GetBrandSubscription{
+export class UpdateBrandSubscription{
     brandId: string;
+    subscriptionId: string;
+    subscriptionStatus: string;
 }
