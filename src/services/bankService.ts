@@ -16,36 +16,14 @@ class BankService implements IBankService {
 
     public async postBankDetails(bankDetailsData: BankDetails): Promise<BankDetails>{
         try{
-            let bankDetails: BankDetails ={
-
-                BankNumber: bankDetailsData.BankNumber,
-                BrandId: bankDetailsData.BrandId,
-                BankType: bankDetailsData.BankType,
-                BankName: bankDetailsData.BankName,
-                BankUrl: bankDetailsData.BankUrl,
-                BankStatus:bankDetailsData.BankStatus,
-                IsDefault:bankDetailsData.IsDefault
-            };
-            let sql = `CALL Insertbankdetails(?,?,?,?,?,?,?)`
-            let result = await db.query(sql,[
-                bankDetails.BankNumber,
-                bankDetails.BrandId,
-                bankDetails.BankType,
-                bankDetails.BankName,
-                bankDetails.BankUrl,
-                bankDetails.BankStatus,
-                bankDetails.IsDefault
-            ])
-            console.log("Bankdetails insertion result",result);
+            let sql = `CALL Insertbankdetails(?,?,?,?,?,?,?,?)`
+            let result = await db.query(sql,Object.values(bankDetailsData))
             return result;
+
         }catch (err) {
             return err;
         }
     }
-
-
-
-
 }
 
 export { BankService };
