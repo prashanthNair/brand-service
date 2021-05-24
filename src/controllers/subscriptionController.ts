@@ -35,7 +35,7 @@ class SubscriptionController {
         let { error, isError } = this.validationService.getBrandSubscriptions(req.body);
 
         if (error) {
-            HttpResponseMessage.sendErrorResponse(res, "input validation error", error)
+            HttpResponseMessage.validationErrorWithData(res, "input validation error", error)
         }
         else {
 
@@ -54,7 +54,7 @@ class SubscriptionController {
         let {error, isError} = this.validationService.postBrandSubscription(req.body);
 
         if(isError){
-            HttpResponseMessage.sendErrorResponse(res, "input validation error", error)
+            HttpResponseMessage.validationErrorWithData(res, "input validation error", error)
         }else{
             let brandSubData: BrandSubscription = {
                 brandId: req.body.brandId,
@@ -75,7 +75,7 @@ class SubscriptionController {
         let {error, isError} = this.validationService.updateBrandSubscription({...req.body, ...req.params});
 
         if(isError){
-            HttpResponseMessage.sendErrorResponse(res, "input validation error", error)
+            HttpResponseMessage.validationErrorWithData(res, "input validation error", error)
         }else{
             let brandSubData: BrandSubscription = {
                 brandId: req.params.brandId,
