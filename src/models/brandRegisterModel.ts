@@ -16,7 +16,6 @@ export class BrandRegisterModel {
     Designation: string;
     UserEmailId: string;
     RegBusinessName: string;
-
     RegisteredType: string; 
     AccountPassword: string; 
 

@@ -66,4 +66,73 @@ export class BrandController {
         })
     }
 
+    public async patchBrandUpdate(req: Request, res: Response, next: NextFunction) {
+
+        let signupData: BrandRegisterModel = {
+            DomainID: req.body.DomainID,
+            CategoryId: req.body.CategoryId,
+            Category: req.body.Category,
+            BrandName: req.body.BrandName,
+            About: req.body.About,
+            Country: req.body.Country,
+            EmailId: req.body.EmailId,
+            PhoneNumber: req.body.PhoneNumber,
+            CountryCode: req.body.CountryCode,
+            Street: req.body.Street,
+            City: req.body.City,
+            State: req.body.State,
+            PostalCode: req.body.PostalCode,
+            UserName: req.body.UserName,
+            Designation: req.body.Designation,
+            UserEmailId: req.body.UserEmailId,
+            RegBusinessName: req.body.RegBusinessName,
+            RegisteredType: req.body.RegisteredType,
+            AccountPassword: req.body.AccountPassword
+        };
+        const result = this.brandService.update(req.body.id,signupData).then(result => {
+            HttpResponseMessage.successResponse(res,result, "Sucessfull");
+        }).catch(error => {
+            HttpResponseMessage.sendErrorResponse(error, "Transaction Failed");
+        })
+    }
+
+    public async getAllProductCategory(req: Request, res: Response, next: NextFunction) {
+        try {
+          const result = await this.brandService.getAllProductCategory(req.body.category_Id); // :TODO remove hardcode
+          if (result) {
+            HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
+          } else {
+            HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
+          }
+        } catch (err) {
+          HttpResponseMessage.sendErrorResponse(res, err);
+        }
+      }
+
+      public async getAllCategory(req: Request, res: Response, next: NextFunction) {
+        try {
+          const result = await this.brandService.getAllCategory(req.body.domain_Id); // :TODO remove hardcode
+          if (result) {
+            HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
+          } else {
+            HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
+          }
+        } catch (err) {
+          HttpResponseMessage.sendErrorResponse(res, err);
+        }
+      }
+
+      public async getAllDomains(req: Request, res: Response, next: NextFunction) {
+        try {
+          const result = await this.brandService.getAllDomains(); // :TODO remove hardcode
+          if (result) {
+            HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
+          } else {
+            HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
+          }
+        } catch (err) {
+          HttpResponseMessage.sendErrorResponse(res, err);
+        }
+      }
+
 }

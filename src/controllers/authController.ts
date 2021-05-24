@@ -3,7 +3,7 @@ import { IAuthService } from "../services/IAuthService";
 import { AuthService } from "../services/authService";
 import { HttpResponseMessage } from "../utils/httpResponseMessage";
 import { Update, User } from "../models/user";
-
+ 
 
 export class AuthController {
   private constructor() {}

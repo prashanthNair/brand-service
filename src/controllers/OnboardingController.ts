@@ -68,8 +68,7 @@ export class SignupController {
           console.log(result)        
           HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
         }
-        else if (result) {
-          console.log(result,"xsxsxvvvvvvvvvvvvvvvvvvvvv")        
+        else if (result) {       
           HttpResponseMessage.successResponse(res, "Sucessfull");
         } else {
           HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
