@@ -52,6 +52,9 @@ class BankValidation implements IBankValidation{
         
         if(isEmpty(data.IsDefault)) error["IsDefault"] = "Is Default field cannot be left blank";
         if(typeof(data.IsDefault) !== "string" ) error["IsDefault"] = "Is Default must be of type string";
+
+        if(isEmpty(data.IfscCode)) error["IfscCode"] = "IFSC field cannot be left blank";
+        if(typeof(data.IfscCode) !== "string" ) error["IfscCode"] = "IFSC must be of type string";
         
 
         let isError = !isEmpty(error);

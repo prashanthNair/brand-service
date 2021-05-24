@@ -7,15 +7,12 @@ import { BankValidation } from "../businessValidation/bankValidation";
 import { IBankValidation } from "../businessValidation/IBankvalidation";
 
 
-
 export class BankController {
     private constructor() { }
 
     private static instance: BankController = null;
     private bankService = null;
     private validator = null;
-
-
 
     public static getInstance(
         bankService: IBankService = BankService.getInstance(),
@@ -34,22 +31,24 @@ export class BankController {
         let { error, isError } = this.validator.validatePostBankDetailsInput(req.body);
 
         if (isError) {
-            HttpResponseMessage.sendErrorResponse(res, "input validation error", error)
+            HttpResponseMessage.validationErrorWithData(res, "input validation error", error)
         } else {
             let bankDetailsInputModel: BankDetails = {
-                BankNumber: req.body.BankNumber,
+                
                 BrandId: req.body.BrandId,
                 BankType: req.body.BankType,
                 BankName: req.body.BankName,
+                IfscCode: req.body.IfscCode,
                 BankUrl: req.body.BankUrl,
                 BankStatus: req.body.BankStatus,
-                IsDefault: req.body.IsDefault
+                IsDefault: req.body.IsDefault,
+                BankNumber: req.body.BankNumber
             };
 
             const result = await this.bankService.postBankDetails(bankDetailsInputModel);
 
             if (result) {
-                HttpResponseMessage.successResponse(res, "Sucessfull");
+                HttpResponseMessage.successResponse(res, "Bank Account Details inserted Sucessfully");
             } else {
                 HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
             }
