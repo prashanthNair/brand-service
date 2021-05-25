@@ -6,7 +6,7 @@ class AuthService implements IAuthService {
   private constructor() {}
   getUserById(id: any) {
     throw new Error("Method not implemented.");
-  }
+  } 
 
   private static instance: IAuthService = null;
 

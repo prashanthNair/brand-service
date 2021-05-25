@@ -1,4 +1,4 @@
-export class BrandRegisterModel { 
+export class BrandRegisterModel {
     DomainID:string;
     CategoryId:string;
     Category:string; 
@@ -16,15 +16,11 @@ export class BrandRegisterModel {
     Designation: string;
     UserEmailId: string;
     RegBusinessName: string;
-
     RegisteredType: string; 
     AccountPassword: string; 
 
   }
 
-  export class BankDetails {
-     
-  }
 
   
 
