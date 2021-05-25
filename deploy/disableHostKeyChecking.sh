@@ -10,7 +10,7 @@
 # Host *
 #   StrictHostKeyChecking no
 #
-
+sudo chmod a+x
 # any future command that fails will exit the script
 set -e
 mkdir -p ~/.ssh
