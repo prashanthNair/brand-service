@@ -4,6 +4,6 @@ import { Product } from "../models/product";
 export interface IProductService {
   postProduct(productData: Product);
   getProduct(productId: string): Promise<Product>;
-  getProducts(businessId: string): Promise<Product>;
+  getProducts(businessId: object): Promise<Product>;
   
 }

@@ -76,23 +76,27 @@ class ProductValidation implements IProductValidation {
         return {error, isError};
     }
 
-    public validateGetProducts = (data) => {
+    public validateGetProducts = (data: object) => {
       let error = {};
       
-      if(isEmpty(data.businessId)) error["businessId"] = "businessId field is required";
-      if(typeof(data.businessId) !== "string") error["businessId"] = "businessId must be of type string";
-  //  if(!validator.isLength(data.businessId{min:1, max: 30})) error["businessId"] = "businessId length exceeded";
+      if(isEmpty(data["brandId"])) error["brandId"] = "brandId field is required";
+      if(typeof(data["brandId"]) !== "string") error["brandId"] = "brandId must be of type string";
+  //  if(!validator.isLength(data.brandId, {min:1, max: 30})) error["brandId"] = "brandId length exceeded";
 
+      if (data["subCategoryId"] && typeof (data["subCategoryId"]) !== "string") error["subCategoryId"] = "subCategoryId must be of type string";
+
+      if (data["status"] && typeof (data["status"]) !== "string") error["status"] = "status must be of type string";
+      
       let isError = !isEmpty(error);
       return {error, isError};
     }
 
-    public validateGetSingleProduct = (data) => {
+    public validateGetSingleProduct = (data: object) => {
       let error = {};
       
-      if(isEmpty(data.productId)) error["productId"] = "productId field is required";
-      if(typeof(data.productId) !== "string") error["productId"] = "productId must be of type string";
-  //  if(!validator.isLength(data.productId{min:1, max: 30})) error["productId"] = "productId length exceeded";
+      if(isEmpty(data["productId"])) error["productId"] = "productId field is required";
+      if(typeof(data["productId"]) !== "string") error["productId"] = "productId must be of type string";
+  //  if(!validator.isLength(data.productId, {min:1, max: 30})) error["productId"] = "productId length exceeded";
 
       let isError = !isEmpty(error);
       return {error, isError};

@@ -35,7 +35,7 @@ export class ProductController {
   public async postProducts(req: Request, res: Response, next: NextFunction) {
 
     // validate api input:
-    let { error, isError } = this.validator.validatePostProductInput(req.body);
+    let { error, isError } = this.validator.validatePostProductInput({ ...req.body, ...req.params });
 
     if (isError) {
       HttpResponseMessage.sendErrorResponse(res, "input validation error", error)
@@ -72,48 +72,55 @@ export class ProductController {
     }
   }
 
-  async getProducts(req: Request, res: Response, next: NextFunction) {
+  async getAllBrandProducts(req: Request, res: Response, next: NextFunction) {
 
-    let { error, isError } = this.validator.validateGetProducts(req.body);
+    let { error, isError } = this.validator.validateGetProducts({ ...req.params, ...req.query });
 
     if (isError) {
+
       HttpResponseMessage.sendErrorResponse(res, "input validation error", error)
     } else {
 
-      let { businessId } = req.body;
+      let inputData: object = { 
+        "subCategoryId": req.query.subCategoryId || "",
+        "brandId": req.params.brandId,
+        "status": req.query.status || ""
+      };
 
-      if (businessId) {
-        const result = await this.productService.getProducts(businessId);
+      // if (req.query.subCategoryId) inputData["subCategoryId"] = req.query.subCategoryId;
+      // if (req.query.status) inputData["status"] = req.query.status;
 
-        if (!result.error) {
-          HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
-        } else {
-          HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
-        }
-      }
+      this.productService.getProducts(inputData)
+        .then(result => {
+
+          let _result = result[0][1];
+          HttpResponseMessage.successResponseWithData(res, "Sucessfull", _result);
+        }).catch(err => {
+
+          HttpResponseMessage.sendErrorResponse(res, "Transaction Failed", err.message);
+        });
+
     }
-
-
   }
 
-  async getProduct(req: Request, res: Response, next: NextFunction) {
+  async getBrandProduct(req: Request, res: Response, next: NextFunction) {
 
     let { error, isError } = this.validator.validateGetSingleProduct(req.params);
 
     if (isError) {
       HttpResponseMessage.sendErrorResponse(res, "input validation error", error)
     } else {
-      let productId = req.params && req.params.productId ? req.params.productId : null;
+      let productId = req.params.productId;
 
-      if (productId) {
-        const result = await this.productService.getProduct(productId);
+      this.productService.getProduct(productId)
+        .then(result => {
 
-        if (!result.error) {
-          HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
-        } else {
-          HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
-        }
-      }
+          let _result = result[0][0];
+          HttpResponseMessage.successResponseWithData(res, "Sucessfull", _result);
+        }).catch(err => {
+
+          HttpResponseMessage.sendErrorResponse(res, "Transaction Failed", err.message);
+        });
     }
   }
 }

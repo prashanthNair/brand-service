@@ -8,9 +8,9 @@ const productRoute = (
 
     /**
     * @swagger
-    * /api/v1/products:
+    * /api/v1/brand/{brandId}/products:
     *   post:
-    *     summary: Create entry to priduct table.
+    *     summary: Reginster new product under a brand.
     *     requestBody:
     *       required: true
     *       content:
@@ -28,7 +28,7 @@ const productRoute = (
     *
     */
     app
-        .route('/api/v1/products')
+        .route('/api/v1/brand/:brandId/products')
         .post(
             async (req: Request, res: Response, next: NextFunction) => {
                 await productController.postProducts(req, res, next);
@@ -36,15 +36,28 @@ const productRoute = (
 
     /**
     * @swagger
-    * /api/v1/products:
+    * /api/v1/brand/{brandId}/products:
     *   get:
-    *     summary: Get details of all priducts.
-    *     requestBody:
-    *       required: true
-    *       content:
-    *         application/json:
-    *           schema:
-    *             $ref: '#/components/schemas/Get_Products'
+    *     summary: Get details of all products associated with the brand.
+    *     parameters:
+    *       - in: path
+    *         name: brandId
+    *         required: true
+    *         description: brandId of the brand
+    *         schema:
+    *           type: string
+    *       - in: query
+    *         name: subCategoryId
+    *         required: false
+    *         description: SubCategoryId of the product
+    *         schema:
+    *           type: string
+    *       - in: query
+    *         name: status
+    *         required: false
+    *         description: status of the product "Active"/"Inactive"
+    *         schema:
+    *           type: string
     *     responses:
     *       201:
     *         description: Login Page successfully retrieved
@@ -56,30 +69,30 @@ const productRoute = (
     *
     */
     app
-        .route('/api/v1/products')
+        .route('/api/v1/brand/:brandId/products')
         .get(
             async (req: Request, res: Response, next: NextFunction) => {
-                await productController.getProducts(req, res, next);
+                await productController.getAllBrandProducts(req, res, next);
             })
 
     /**
     * @swagger
-    * /api/v1/products/{productId}:
+    * /api/v1/brand/{brandId}/products/{productId}:
     *   get:
     *     summary: Get details of specific product.
     *     parameters:
     *       - in: path
+    *         name: brandId
+    *         required: true
+    *         description: brandId of the brand
+    *         schema:
+    *           type: string
+    *       - in: path
     *         name: productId
     *         required: true
-    *         description: Id of the product
+    *         description: productId of the product
     *         schema:
-    *           type: integer
-    *     requestBody:
-    *       required: true
-    *       content:
-    *         application/json:
-    *           schema:
-    *             $ref: '#/components/schemas/Get_Product'
+    *           type: string
     *     responses:
     *       201:
     *         description: Login Page successfully retrieved
@@ -91,10 +104,10 @@ const productRoute = (
     *
     */
     app
-        .route('/api/v1/products/:productId')
+        .route('/api/v1/brand/:brandId/products/:productId')
         .get(
             async (req: Request, res: Response, next: NextFunction) => {
-                await productController.getProduct(req, res, next);
+                await productController.getBrandProduct(req, res, next);
             })
 }
 

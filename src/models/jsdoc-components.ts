@@ -67,20 +67,12 @@
  *      Get_products:
  *        type: object
  *        properties:
- *          brandId:
+ *          subCategoryId:
  *            type: staring
- *            description: brandId
- */
-/**
- * @swagger
- *  components:
- *    schemas:
- *      Get_product:
- *        type: object
- *        properties:
- *          productId:
- *            type: string
- *            description: productId
+ *            description: subCategoryId of products
+ *          status: 
+ *             type: string
+ *             description: Current status of products "Active"/"Inactive"
  */
 /**
  * @swagger
