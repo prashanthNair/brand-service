@@ -31,5 +31,8 @@ cd /home/ubuntu/ci_cd_demo
 echo "Running npm install"
 npm install
 
+#build 
+npm run build
+
 #Restart the node server
-npm start
+npm run start
