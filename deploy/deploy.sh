@@ -15,7 +15,7 @@
 # chmod +x ./deploy/disableHostKeyChecking.sh
 
 # ssh -o StrictHostKeyChecking=no tech@migobucks.com uptime
-ssh -i -----BEGIN RSA PRIVATE KEY-----
+ssh -i 
 MIIEpQIBAAKCAQEAjEeQj5JqjjCng+xcCkA79LnqwB7iJq/Uqow95+5FbqEbq/8j
 9dk/aKAPWrca6wKu1aIqYOVc1D67XY4/Pl2fg/xgeiSI5jUsQk4ZEEDffvLsmPFT
 BV2VXvKaQziBNoMYfOkukpTh257MCjpn2uWt/VI13w3O+w4B0Nzt5DfcC1hvM01k
@@ -40,8 +40,7 @@ DU+Z5MsADRyTr+eN4dQkTcECgYEAhv/0HLNLh6xkE7UeLotP6wwFPfXg/ySSIU1P
 pYekhhgxQIdz+E1y79wFdrCUpRdonJEJaMPVkoa53ohqJnuOkFc7Is7QEuOmt0OJ
 c/KK5OcCgYEAqQuGDiVJIBC9UauTJH+mzFId5WU/3ox2Z1Tr8jAZu+YONdMuHg+K
 9PyApulaOKwqdUjvh6yo6hgE6/v9fYPUdya5+xdM/SuCaN67uCnAg9JnVU3wwaYR
-W8lH3/lJb22pRFhencJBmLqtpbmozyQ2E9r9HxfbgjewCKwlO+PVBWw=
------END RSA PRIVATE KEY----- root@65.2.141.174
+W8lH3/lJb22pRFhencJBmLqtpbmozyQ2E9r9HxfbgjewCKwlO+PVBWw= root@65.2.141.174
 # we have already setup the DEPLOYER_SERVER in our gitlab settings which is a
 # comma seperated values of ip addresses.
 DEPLOY_SERVERS=$DEPLOY_SERVERS
