@@ -24,7 +24,7 @@ DEPLOY_SERVERS=$DEPLOY_SERVERS
 # our substring is "," and we replace it with nothing.
 ALL_SERVERS=(${DEPLOY_SERVERS//,/ })
 echo "ALL_SERVERS ${ALL_SERVERS}"
-ssh ubuntu@${server} 'bash -s' < ./deploy/updateAndRestart.sh
+ssh root@${server} 'bash -s' < ./deploy/updateAndRestart.sh
 # Lets iterate over this array and ssh into each EC2 instance
 # Once inside.
 # 1. Stop the server
