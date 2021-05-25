@@ -17,9 +17,8 @@ export class BrandService implements IBrandService {
 
     public async register(signupData: BrandRegisterModel): Promise<Object> {
         try {
-
             let sql = `CALL Insert_Brand(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
-            let result = await db.query(sql, [
+            let result = await db.query(sql, [                
                 signupData.DomainID,
                 signupData.CategoryId,
                 signupData.Category,
@@ -41,18 +40,19 @@ export class BrandService implements IBrandService {
                 signupData.AccountPassword
             ]);
             return result;
-
         } catch (err) {
             return err;
         }
 
     }
 
-    public async update(id:string,updateData: BrandRegisterModel): Promise<Object> {
+    public async update(BrandID:string,updateData: BrandRegisterModel): Promise<Object> {
         try{
-          let sql = `CALL Update_Brand(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`
+          let sql = `CALL Update_Brand(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
           let result = await db.query(
-            sql,[updateData.DomainID,
+            sql,[
+                BrandID,
+                updateData.DomainID,
                 updateData.CategoryId,
                 updateData.Category,
                 updateData.BrandName,
@@ -70,8 +70,7 @@ export class BrandService implements IBrandService {
                 updateData.UserEmailId,
                 updateData.RegBusinessName,
                 updateData.RegisteredType,
-                updateData.AccountPassword]);
-          console.log(result);
+                ]);
           return result;
         }catch (err) {
           return err;
@@ -79,10 +78,10 @@ export class BrandService implements IBrandService {
       } 
 
       
-  public async getAllCategory(domain_Id: string): Promise<BrandRegisterModel> {
+  public async getAllCategory(DomainID: string): Promise<BrandRegisterModel> {
     try {
       let sql = `CALL GetAllCategory(?)`;
-      const [rows, fields] = await db.query(sql, domain_Id);
+      const [rows, fields] = await db.query(sql, DomainID);
       return rows;
     } catch (error) {
       return null;
@@ -100,10 +99,10 @@ export class BrandService implements IBrandService {
     }
   }
 
-  public async getAllProductCategory(category_Id: string): Promise<BrandRegisterModel> {
+  public async getAllProductCategory(CategoryId: string): Promise<BrandRegisterModel> {
     try {
       let sql = `CALL GetAllProductCategory(?)`;
-      const [rows, fields] = await db.query(sql, category_Id);
+      const [rows, fields] = await db.query(sql, CategoryId);
       return rows;
     } catch (error) {
       return null;

@@ -37,7 +37,6 @@ export class BrandController {
  */
 
     public async postBrandRegister(req: Request, res: Response, next: NextFunction) {
-
         let signupData: BrandRegisterModel = {
             DomainID: req.body.DomainID,
             CategoryId: req.body.CategoryId,
@@ -67,7 +66,7 @@ export class BrandController {
     }
 
     public async patchBrandUpdate(req: Request, res: Response, next: NextFunction) {
-
+        
         let signupData: BrandRegisterModel = {
             DomainID: req.body.DomainID,
             CategoryId: req.body.CategoryId,
@@ -89,7 +88,9 @@ export class BrandController {
             RegisteredType: req.body.RegisteredType,
             AccountPassword: req.body.AccountPassword
         };
-        const result = this.brandService.update(req.body.id,signupData).then(result => {
+        const result = this.brandService.update(req.body.BrandID,signupData).then(result => {
+            console.log(result);
+            
             HttpResponseMessage.successResponse(res,result, "Sucessfull");
         }).catch(error => {
             HttpResponseMessage.sendErrorResponse(error, "Transaction Failed");
@@ -98,7 +99,8 @@ export class BrandController {
 
     public async getAllProductCategory(req: Request, res: Response, next: NextFunction) {
         try {
-          const result = await this.brandService.getAllProductCategory(req.body.category_Id); // :TODO remove hardcode
+          const result = await this.brandService.getAllProductCategory(req.body.CategoryId); // :TODO remove hardcode
+          
           if (result) {
             HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
           } else {
@@ -111,7 +113,7 @@ export class BrandController {
 
       public async getAllCategory(req: Request, res: Response, next: NextFunction) {
         try {
-          const result = await this.brandService.getAllCategory(req.body.domain_Id); // :TODO remove hardcode
+          const result = await this.brandService.getAllCategory(req.body.DomainID); // :TODO remove hardcode
           if (result) {
             HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
           } else {

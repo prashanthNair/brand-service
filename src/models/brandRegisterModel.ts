@@ -1,4 +1,4 @@
-export class BrandRegisterModel { 
+export class BrandRegisterModel {
     DomainID:string;
     CategoryId:string;
     Category:string; 
@@ -21,9 +21,6 @@ export class BrandRegisterModel {
 
   }
 
-  export class BankDetails {
-     
-  }
 
   
 

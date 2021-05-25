@@ -18,7 +18,65 @@ export const brandRoutes = (
      *       content:
      *         application/json:
      *           schema:
-     *             $ref: '#/components/schemas/Brand'   
+     *             type: object
+     *             properties:
+     *               DomianID:
+     *                 type: string
+     *                 description: The Id assigned to specific domian.
+     *               CategoryId:
+     *                 type: string
+     *                 description: The Id assigned to specific category.
+     *               Category:
+     *                 type: string
+     *                 description: The categoryname.
+     *               BrandName:
+     *                 type: string
+     *                 description: The brand's name.
+     *               About:
+     *                 type: string
+     *                 description: The additional details about the brand.
+     *               Country:
+     *                 type: string
+     *                 description: The country's name where brand operates.
+     *               EmailId:
+     *                 type: string
+     *                 description: The brand's official email.
+     *               PhoneNumber:
+     *                 type: number
+     *                 description: Official phone number.
+     *               CountryCode:
+     *                 type: string
+     *                 description: The country code for the phone number.
+     *               Street:
+     *                 type: string
+     *                 description: The street's name.
+     *               City:
+     *                 type: string
+     *                 description: The city's name.
+     *               State:
+     *                 type: string
+     *                 description: The state's name.
+     *               PostalCode:
+     *                 type: string
+     *                 description: The Postal code of the place.
+     *               Username:
+     *                 type: string
+     *                 description: The brand's official man's name.
+     *               Designation:
+     *                 type: string
+     *                 description: The official mans's position.
+     *               UserEmailId:
+     *                 type: string
+     *                 description: The official mans's email id.
+     *               RegBusinessName:
+     *                 type: string
+     *                 description: The Registered business name.
+     *               RegisteredType:
+     *                 type: string
+     *                 description: The type of registration.
+     *               AccountPassword:
+     *                 type: string
+     *                 description: The Password for this account.
      *     responses:
      *       201:
      *         description: Signup Page successfully retrieved        
@@ -47,7 +105,68 @@ export const brandRoutes = (
      *       content:
      *         application/json:
      *           schema:
-     *             $ref: '#/components/schemas/Brand'   
+     *             type: object
+     *             properties:
+     *               BrandID:
+     *                 type: string
+     *                 description: The Id assigned to specific brand.
+     *               DomianID:
+     *                 type: string
+     *                 description: The Id assigned to specific domian.
+     *               CategoryId:
+     *                 type: string
+     *                 description: The Id assigned to specific category.
+     *               Category:
+     *                 type: string
+     *                 description: The categoryname.
+     *               BrandName:
+     *                 type: string
+     *                 description: The brand's name.
+     *               About:
+     *                 type: string
+     *                 description: The additional details about the brand.
+     *               Country:
+     *                 type: string
+     *                 description: The country's name where brand operates.
+     *               EmailId:
+     *                 type: string
+     *                 description: The brand's official email.
+     *               PhoneNumber:
+     *                 type: number
+     *                 description: Official phone number.
+     *               CountryCode:
+     *                 type: string
+     *                 description: The country code for the phone number.
+     *               Street:
+     *                 type: string
+     *                 description: The street's name.
+     *               City:
+     *                 type: string
+     *                 description: The city's name.
+     *               State:
+     *                 type: string
+     *                 description: The state's name.
+     *               PostalCode:
+     *                 type: string
+     *                 description: The Postal code of the place.
+     *               Username:
+     *                 type: string
+     *                 description: The brand's official man's name.
+     *               Designation:
+     *                 type: string
+     *                 description: The official mans's position.
+     *               UserEmailId:
+     *                 type: string
+     *                 description: The official mans's email id.
+     *               RegBusinessName:
+     *                 type: string
+     *                 description: The Registered business name.
+     *               RegisteredType:
+     *                 type: string
+     *                 description: The type of registration.
+     *               AccountPassword:
+     *                 type: string
+     *                 description: The Password for this account.
      *     responses:
      *       201:
      *         description: Updation successfully retrieved        
@@ -61,7 +180,7 @@ export const brandRoutes = (
 
      app
      .route("/api/v1/brand/update")
-     .post(
+     .patch(
          (req: Request, res: Response, next: NextFunction) =>
              brandController.patchBrandUpdate(req, res, next)
      );
@@ -70,12 +189,12 @@ export const brandRoutes = (
 
   /**
    * @swagger
-   * /:
+   * /brand/getalldomains:
    *   get:
    *     summary: Get all Domains.
    *        
    *     responses:
-   *       201:
+   *       200:
    *         description: All domains successfully retrieved        
    *       500:
    *         $ref: '#/components/responses/FailureError'
@@ -94,12 +213,21 @@ export const brandRoutes = (
    
   /**
    * @swagger
-   * /:
-   *   get:
+   * /getallcategory:
+   *   post:
    *     summary: Get all Categories.
-   *        
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               DomainID:
+   *                 type: string
+   *                 description: The Id assigned to specific Domain.        
    *     responses:
-   *       201:
+   *       200:
    *         description: All Categories successfully retrieved        
    *       500:
    *         $ref: '#/components/responses/FailureError'
@@ -111,22 +239,30 @@ export const brandRoutes = (
 
    app
    .route("/api/v1/brand/getallcategory")
-   .get(
+   .post(
      (req: Request, res: Response, next: NextFunction) =>
      brandController.getAllCategory(req, res, next)
    );
 
 
-
   /**
    * @swagger
-   * /:
-   *   get:
-   *     summary: Get all Product categories.
-   *        
+   * /getallproductcategory:
+   *   post:
+   *     summary: Get all Product Categories.
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               CategoryId:
+   *                 type: string
+   *                 description: The Id assigned to specific Category.        
    *     responses:
-   *       201:
-   *         description: Product Categories successfully retrieved        
+   *       200:
+   *         description: All Product Categories successfully retrieved        
    *       500:
    *         $ref: '#/components/responses/FailureError'
    *       400:
@@ -137,7 +273,7 @@ export const brandRoutes = (
 
    app
    .route("/api/v1/brand/getallproductcategory")
-   .get(
+   .post(
      (req: Request, res: Response, next: NextFunction) =>
      brandController.getAllProductCategory(req, res, next)
    );
