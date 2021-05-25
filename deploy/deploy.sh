@@ -12,7 +12,7 @@ echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
 # ** End of alternative approach
 
 # disable the host key checking.
- sudo chmod +x ./deploy/disableHostKeyChecking.sh
+ chmod +x ./deploy/disableHostKeyChecking.sh
 
 # ssh -o StrictHostKeyChecking=no tech@migobucks.com uptime
 
