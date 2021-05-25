@@ -14,7 +14,7 @@ echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
 # disable the host key checking.
 # ./deploy/disableHostKeyChecking.sh
 
- ssh -o StrictHostKeyChecking=no
+  ssh -o StrictHostKeyChecking=no tech@migobucks.com uptime
 
 # we have already setup the DEPLOYER_SERVER in our gitlab settings which is a
 # comma seperated values of ip addresses.
