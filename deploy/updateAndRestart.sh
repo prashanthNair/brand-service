@@ -7,7 +7,7 @@ set -e
 rm -rf /home/ubuntu/migobucksbrandservice
 
 # clone the repo again
-git clone https://gitlab.com/migobucks_personal/migobucksbrandservice.git
+git clone https://gitlab.com/migobucks_personal/CC.git
 
 #source the nvm file. In an non
 # If you are not using nvm, add the actual path like
@@ -21,6 +21,7 @@ git clone https://gitlab.com/migobucks_personal/migobucksbrandservice.git
 
 #pm2 needs to be installed globally as we would be deleting the repo folder.
 # this needs to be done only once as a setup script.
+cd migobucksbrandservice
 npm install pm2 -g
 # starting pm2 daemon
 pm2 status
