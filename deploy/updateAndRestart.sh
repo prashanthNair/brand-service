@@ -6,8 +6,9 @@ set -e
 # Delete the old repo
 rm -rf /home/ubuntu/ci_cd_demo/
 
+git remote add origin git@gitlab.com:migobucks_personal/migobucksbrandservice.git
 # clone the repo again
-git clone https://gitlab.com/migobucks_personal/migobucksbrandservice.git
+git clone git@gitlab.com:migobucks_personal/migobucksbrandservice.git
 
 #source the nvm file. In an non
 #If you are not using nvm, add the actual path like
