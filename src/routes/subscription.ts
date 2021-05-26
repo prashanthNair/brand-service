@@ -8,6 +8,33 @@ const subscriptionRoute = (
 
     /**
     * @swagger
+    * /api/v1/subscriptions/{subscriptionId}:
+    *   get:
+    *     summary: Get all subscriptions associated with the brand.
+    *     parameters: 
+    *       - in: path
+    *         name: subscriptionId
+    *         required: true
+    *         description: subcriptionId of subscription
+    *         schema:
+    *           type: string
+    *     responses:
+    *       201:
+    *         description: Login Page successfully retrieved
+    *       500:
+    *         $ref: '#/components/responses/FailureError'
+    *       400:
+    *         $ref: '#/components/responses/BadRequest'
+    *
+    */
+    app
+        .route('/api/v1/subscriptions/:subscriptionId')
+        .get((req: Request, res: Response, next: NextFunction) => {
+            subscriptionService.getMasterSubscriptions(req, res, next);
+        })
+
+    /**
+    * @swagger
     * /api/v1/brand/{brandId}/subscriptions:
     *   get:
     *     summary: Get all subscriptions associated with the brand.
@@ -31,7 +58,7 @@ const subscriptionRoute = (
         .route("/api/v1/brand/:brandId/subscriptions")
         .get(
             async (req: Request, res: Response, next: NextFunction) => {
-                subscriptionService.getBrandSubscriptions(req, res, next);
+               await subscriptionService.getBrandSubscriptions(req, res, next);
             }
         );
 
@@ -68,7 +95,7 @@ const subscriptionRoute = (
         .route("/api/v1/brand/:brandId/subscriptions") 
         .post(
             async (req: Request, res: Response, next: NextFunction) => {
-                subscriptionService.postBrandSubscription(req, res, next);
+                await subscriptionService.postBrandSubscription(req, res, next);
             }
         );
 
@@ -110,7 +137,7 @@ const subscriptionRoute = (
         .route("/api/v1/brand/:brandId/subscriptions/:subscriptionId") // get all subscriptions....
         .put(
             async (req: Request, res: Response, next: NextFunction) => {
-                subscriptionService.updateBrandSubscription(req, res, next);
+                await subscriptionService.updateBrandSubscription(req, res, next);
             }
         );
 }

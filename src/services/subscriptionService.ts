@@ -15,6 +15,12 @@ class SubscriptionService implements ISubscriptionService{
         return this.instance;
     }
 
+    public getMasterSubscriptions(sub_id: string): Promise<any> {
+
+        let sql = `call Getsubscriptionmaster(?)`
+        return db.query(sql, [sub_id]);
+    }
+
     public async getBrandSubscriptions(brandId: string): Promise<any> {
 
         let sql = `CALL Getbrandsubscription(?)`;

@@ -14,7 +14,18 @@ class SubscriptionValidation implements ISubscriptionValidation{
         return SubscriptionValidation.instance;
     }
 
-    public getBrandSubscriptions(data: Object): object{
+    public getMasterSubscriptions(data: object): object {
+        let error = {};
+
+        if (isEmpty(data["subscriptionId"])) error["subscriptionId"] = "subscriptionId required";
+        if (typeof (data["subscriptionId"]) !== "string") error["subscriptionId"] = "subscriptionId must be of type string";
+
+        let isError = !isEmpty(error);
+
+        return { error, isError };
+    }
+
+    public getBrandSubscriptions(data: object): object{
         let error = {};
 
         if(isEmpty(data["brandId"])) error["brandId"] = "brandId required";

@@ -30,6 +30,28 @@ class SubscriptionController {
         return SubscriptionController.instance;
     }
 
+    public getMasterSubscriptions(req: Request, res: Response, next: NextFunction) {
+
+        let { error, isError } = this.validationService.getMasterSubscriptions(req.params);
+
+        if (isError) {
+            HttpResponseMessage.validationErrorWithData(res, "input validation error", error)
+        }
+        else {
+
+            let sub_Id: string = req.params.subscriptionId;
+            this.subscriptionService.getMasterSubscriptions(sub_Id)
+                .then(result => {
+                    let _result = result[0][0];
+                    HttpResponseMessage.successResponseWithData(res, "Sucessfull", _result);
+                })
+                .catch(err => {
+                    HttpResponseMessage.sendErrorResponse(res, "Transaction Failed", error.message);
+                });
+        }
+
+    }
+
     public getBrandSubscriptions(req: Request, res: Response, next: NextFunction) {
 
         let { error, isError } = this.validationService.getBrandSubscriptions(req.params);
