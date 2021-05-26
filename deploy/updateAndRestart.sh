@@ -7,7 +7,7 @@ set -e
 rm -rf /home/ubuntu/migobucksbrandservice
 
 # clone the repo again
-git clone https://gitlab.com/migobucks_personal/CC.git
+git clone https://gitlab.com/migobucks_personal/migobucksbrandservice.git
 
 #source the nvm file. In an non
 # If you are not using nvm, add the actual path like
