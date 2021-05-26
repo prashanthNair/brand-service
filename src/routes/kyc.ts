@@ -65,6 +65,36 @@ const kycRoute = (
             }
         )
 
+
+
+
+/**
+ *  @swagger
+ * 
+ * 
+ *  
+ *  /api/v1/brand/{brandId}/kyc:
+ *      get:
+ *          summary: Get Kyc Details
+ *          description: Get Kyc Details of a brand
+ *          parameters:
+ *                - in: path
+ *                  name: brandId
+ *                  required: true
+ *                  description: BrandId of the Brand
+ *                  schema:
+ *                      type: string
+ *          
+ *          responses:
+ *              200:
+ *                  description: Fetched Kyc Details Sucessfully
+ *              400:
+ *                  description: BAD_REQUEST ( Validation error )
+ *              500:
+ *                  description: Fetching Kyc Details Failed
+ * 
+ */
+
     
     app
         .route('/api/v1/brand/:brandId/kyc')
