@@ -135,8 +135,8 @@ npm install pm2 -g
 # starting pm2 daemon
 pm2 status
 
-mkdir app
-cd /app
+#mkdir app
+#cd /app
 #cd /home/ubuntu/ci_cd_demo
 
 #install npm packages
