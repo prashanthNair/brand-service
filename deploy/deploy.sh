@@ -22,8 +22,8 @@ echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
 # echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
 
 # ** Alternative approach
- echo -e "$PRIVATE_KEY" > /root/.ssh/id_rsa
- chmod 600 /root/.ssh/id_rsa
+# echo -e "$PRIVATE_KEY" > /root/.ssh/id_rsa
+# chmod 600 /root/.ssh/id_rsa
 # ** End of alternative approach
 
 # disable the host key checking.
@@ -39,9 +39,9 @@ DEPLOY_SERVERS=$DEPLOY_SERVERS
 # In UNIX, we can use this commond to do this
 # ${string//substring/replacement}
 # our substring is "," and we replace it with nothing.
-ALL_SERVERS=(${DEPLOY_SERVERS//,/ })
+# ALL_SERVERS=(${DEPLOY_SERVERS//,/ })
 echo "ALL_SERVERS ${ALL_SERVERS}"
-ssh root@65.2.141.174 'bash -s' < ./deploy/updateAndRestart.sh
+# ssh root@65.2.141.174 'bash -s' < ./deploy/updateAndRestart.sh
 # Lets iterate over this array and ssh into each EC2 instance
 # Once inside.
 # 1. Stop the server
