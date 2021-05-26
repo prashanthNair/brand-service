@@ -41,7 +41,7 @@ DEPLOY_SERVERS=$DEPLOY_SERVERS
 # our substring is "," and we replace it with nothing.
 ALL_SERVERS=(${DEPLOY_SERVERS//,/ })
 echo "ALL_SERVERS ${ALL_SERVERS}"
-# ssh root@65.2.141.174 'bash -s' < ./deploy/updateAndRestart.sh
+ssh root@65.2.141.174 'bash -s' < ./deploy/updateAndRestart.sh
 # Lets iterate over this array and ssh into each EC2 instance
 # Once inside.
 # 1. Stop the server
@@ -68,16 +68,16 @@ DEPLOY_SERVERS=$DEPLOY_SERVERS
 ALL_SERVERS=(${DEPLOY_SERVERS//,/ })
 echo "ALL_SERVERS ${ALL_SERVERS}"
 echo "deploying to ${server}"
-
 apt-get update -qq
 apt-get install -qq git 
 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )' - eval $(ssh-agent -s)
 mkdir -p ~/.ssh
 chmod 700 ~/.ssh
-echo "$SSH_KEY" | tr -d '\r' | ssh-add - > /dev/null 
+echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null 
 '[[ -f /.dockerenv ]] && echo -e "Host *\n\t StrictHostKeyChecking no \n\n" > ~/.ssh/config' 
 ssh-keyscan 159.65.156.240 >> ~/.ssh/known_hosts
 chmod 644 ~/.ssh/known_hosts
+
 #!/bin/bash
 
 # any future command that fails will exit the script
@@ -117,7 +117,7 @@ npm run build
 #Restart the node server
 npm run start
 
-#ssh root@65.2.141.174 'bash -s' < ./deploy/updateAndRestart.sh
+# ssh root@65.2.141.174 'bash -s' < ./deploy/updateAndRestart.sh
 # Lets iterate over this array and ssh into each EC2 instance
 # Once inside.
 # 1. Stop the server
