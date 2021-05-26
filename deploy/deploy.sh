@@ -106,7 +106,7 @@ chmod 700 ~/.ssh
 #echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null 
 #'[[ -f /.dockerenv ]] && echo -e "Host *\n\t StrictHostKeyChecking no \n\n" > ~/.ssh/config' 
 #ssh-keyscan 65.2.141.174 >> ~/.ssh/known_hosts
-chmod 644 ~/.ssh/known_hosts
+# chmod 644 ~/.ssh/known_hosts
 
 #!/bin/bash
 
