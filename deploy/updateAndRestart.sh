@@ -4,20 +4,19 @@
 set -e
 
 # Delete the old repo
-rm -rf /home/ubuntu/ci_cd_demo/
+rm -rf /home/ubuntu/migobucksbrandservice
 
-git remote add origin git@gitlab.com:migobucks_personal/migobucksbrandservice.git
 # clone the repo again
-git clone git@gitlab.com:migobucks_personal/migobucksbrandservice.git
+git clone https://gitlab.com/migobucks_personal/migobucksbrandservice.git
 
 #source the nvm file. In an non
 #If you are not using nvm, add the actual path like
-#PATH=/home/ubuntu/node/bin:$PATH
-#source /home/ubuntu/.nvm/nvm.sh
+# PATH=/home/ubuntu/node/bin:$PATH
+# source /home/ubuntu/.nvm/nvm.sh
 
 # stop the previous pm2
-pm2 kill
-npm remove pm2 -g
+# pm2 kill
+# npm remove pm2 -g
 
 
 #pm2 needs to be installed globally as we would be deleting the repo folder.
@@ -26,14 +25,11 @@ npm install pm2 -g
 # starting pm2 daemon
 pm2 status
 
-cd /home/ubuntu/ci_cd_demo
+cd /home/ubuntu/migobucksbrandservice
 
 #install npm packages
 echo "Running npm install"
 npm install
 
-#build 
-npm run build
-
 #Restart the node server
-npm run start
+npm start

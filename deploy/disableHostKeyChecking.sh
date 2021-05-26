@@ -10,10 +10,9 @@
 # Host *
 #   StrictHostKeyChecking no
 #
-sudo chmod a+x
+
 # any future command that fails will exit the script
-#sudo set -e
-sudo mkdir -p ~/.ssh
-sudo touch ~/.ssh/config
-ssh -o StrictHostKeyChecking=no
-# sudo echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >> ~/.ssh/config
+set -e
+mkdir -p ~/.ssh
+touch ~/.ssh/config
+echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >> ~/.ssh/config
