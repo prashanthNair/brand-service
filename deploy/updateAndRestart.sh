@@ -35,4 +35,4 @@ npm install
 #Restart the node server
 npm run build
 #Restart the node server
-npm start
+npm run start
