@@ -125,8 +125,8 @@ git clone https://gitlab.com/migobucks_personal/migobucksbrandservice.git
 # source /home/ubuntu/.nvm/nvm.sh
 
 # stop the previous pm2
-pm2 kill
-npm remove pm2 -g
+#pm2 kill
+# npm remove pm2 -g
 
 
 #pm2 needs to be installed globally as we would be deleting the repo folder.
