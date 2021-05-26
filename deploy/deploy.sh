@@ -114,7 +114,7 @@ chmod 700 ~/.ssh
 set -e
 
 # Delete the old repo
-rm -rf /home/ubuntu/ci_cd_demo/
+rm -rf /apps
 
 # clone the repo again
 git clone https://gitlab.com/migobucks_personal/migobucksbrandservice.git
@@ -135,7 +135,9 @@ npm install pm2 -g
 # starting pm2 daemon
 pm2 status
 
-cd /home/ubuntu/ci_cd_demo
+mkdir app
+cd /app
+#cd /home/ubuntu/ci_cd_demo
 
 #install npm packages
 echo "Running npm install"
