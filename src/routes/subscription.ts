@@ -10,7 +10,7 @@ const subscriptionRoute = (
     * @swagger
     * /api/v1/subscriptions/{subscriptionId}:
     *   get:
-    *     summary: Get all subscriptions associated with the brand.
+    *     summary: Get particular subscription details.
     *     parameters: 
     *       - in: path
     *         name: subscriptionId
