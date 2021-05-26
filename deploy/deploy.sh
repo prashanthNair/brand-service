@@ -67,15 +67,17 @@ DEPLOY_SERVERS=$DEPLOY_SERVERS
 # our substring is "," and we replace it with nothing.
 ALL_SERVERS=(${DEPLOY_SERVERS//,/ })
 echo "ALL_SERVERS ${ALL_SERVERS}"
-echo "deploying to ${server}"
+echo "deploying to 65.2.141.174"
 apt-get update -qq
 apt-get install -qq git 
-'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )' - eval $(ssh-agent -s)
+# 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )' - eval $(ssh-agent -s)
+eval $(ssh-agent -s)
+echo "Step 2"
 mkdir -p ~/.ssh
 chmod 700 ~/.ssh
 echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null 
 '[[ -f /.dockerenv ]] && echo -e "Host *\n\t StrictHostKeyChecking no \n\n" > ~/.ssh/config' 
-ssh-keyscan 159.65.156.240 >> ~/.ssh/known_hosts
+ssh-keyscan 65.2.141.174 >> ~/.ssh/known_hosts
 chmod 644 ~/.ssh/known_hosts
 
 #!/bin/bash
