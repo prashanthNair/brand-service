@@ -7,7 +7,7 @@ set -e
 # stop the previous pm2
 # pm2 kill
 # npm remove pm2 -g
-sudo apt-get install npm
+# sudo apt-get install npm
 
 # Delete the old repo
 rm -rf /home/ubuntu/migobucksbrandservice
