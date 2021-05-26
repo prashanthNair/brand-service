@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { IKycService } from "../services/IKycService";
 import { KycService } from "../services/kycService";
-import { KycDetails } from "../models/kycDetails";
+import { KycDetails, KycDetailsUpdateModel } from "../models/kycDetails";
 import { IKycValidation } from "../businessValidation/IKycValidation";
 import { KycValidation } from "../businessValidation/kycValidation";
 import { HttpResponseMessage } from "../utils/httpResponseMessage";
@@ -84,6 +84,37 @@ export class KycController {
 
                 HttpResponseMessage.sendErrorResponse(res, "Fetching Kyc Details is Failed", brand);
 
+            }
+        }
+    }
+
+
+    public async updateKycDetails(req: Request, res: Response, next: NextFunction) {
+        //validate api inputs
+
+        
+        let { error, isError } = this.validator.validateUpdateKycDetailsInput(req.body);
+
+        if (isError) {
+            HttpResponseMessage.validationErrorWithData(res, "input validation error", error)
+        } else {
+            let KycDetailsInputModel: KycDetailsUpdateModel = {
+
+                kycNumber: req.body.kycNumber,
+                kycType: req.body.kycType,
+                kycName: req.body.kycName,
+                kycUrl: req.body.kycUrl,
+                kycStatus: req.body.kycStatus,
+                isDefault: req.body.isDefault
+
+            }
+
+            const result = await this.kycService.updateKycDetails(KycDetailsInputModel);
+
+            if (result) {
+                HttpResponseMessage.successResponse(res, "Kyc Details updated Sucessfully");
+            } else {
+                HttpResponseMessage.sendErrorResponse(res, "Kyc Details updation Failed");
             }
         }
     }

@@ -104,6 +104,63 @@ const kycRoute = (
             }
         )
 
+/**
+ *  @swagger
+ * 
+ * 
+ *  
+ *  /api/v1/brand/{brandId}/kyc:
+ *      put:
+ *          summary: updating kyc_details
+ *          description: updating Brand Kyc details
+ *          parameters:
+ *                - in: path
+ *                  name: brandId
+ *                  required: true
+ *                  description: BrandId of the Brand
+ *                  schema:
+ *                      type: string
+ *          requestBody:
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          properties:
+ *                              kycNumber:
+ *                                  type: string
+ *                                  description: Kyc number of the user
+ *                              kycType:
+ *                                  type: string
+ *                                  description: Type of user Kyc
+ *                              kycName:
+ *                                  type: string
+ *                                  description: Name of user's Kyc Document
+ *                              kycUrl:
+ *                                  type: string
+ *                                  description: Kyc image url
+ *                              kycStatus:
+ *                                  type: string
+ *                                  description: Current Kyc status (Active/Inactive)
+ *                              isDefault:
+ *                                  type: string
+ *                                  description: Is it default Kyc or not
+ *          responses:
+ *              200:
+ *                  description: Kyc Details updated Sucessfully
+ *              400:
+ *                  description: BAD_REQUEST ( Validation error )
+ *              500:
+ *                  description: Kyc Details updation Failed
+ * 
+ */
+
+    app
+        .route('/api/v1/brand/:brandId/kyc')
+        .put(
+            async (req: Request, res: Response, next: NextFunction)=>{
+                await kycController.updateKycDetails(req,res,next);
+            }
+        )
+
 }
 
 export default kycRoute;
