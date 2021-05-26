@@ -15,13 +15,14 @@ echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
 #chmod +x ./deploy/disableHostKeyChecking.sh
 #!/bin/bash
 
- chmod a+x
+ #chmod a+x
 # any future command that fails will exit the script
 #sudo set -e
+# any future command that fails will exit the script
+set -e
 mkdir -p ~/.ssh
-chmod 700 ~/.ssh
 touch ~/.ssh/config
-ssh -o StrictHostKeyChecking=no
+echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >> ~/.ssh/config
 
 # any future command that fails will exit the script
 # set -e
