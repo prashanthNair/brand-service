@@ -76,16 +76,20 @@ class ProductValidation implements IProductValidation {
         return {error, isError};
     }
 
-    public validateGetProducts = (data: object) => {
+    public validateGetAllProducts = (data: object) => {
       let error = {};
       
       if(isEmpty(data["brandId"])) error["brandId"] = "brandId field is required";
       if(typeof(data["brandId"]) !== "string") error["brandId"] = "brandId must be of type string";
   //  if(!validator.isLength(data.brandId, {min:1, max: 30})) error["brandId"] = "brandId length exceeded";
 
-      if (data["subCategoryId"] && typeof (data["subCategoryId"]) !== "string") error["subCategoryId"] = "subCategoryId must be of type string";
+      if (isEmpty(data["productType"])) error["productType"] = "productType field is required";
+      if (typeof (data["productType"]) !== "string") error["productType"] = "productType must be of type string";
+      if(!["exclusive", "combo", "voucher"].includes(data["productType"].toLowerCase())) error["productType"] = "invalid productType";
 
-      if (data["status"] && typeof (data["status"]) !== "string") error["status"] = "status must be of type string";
+      if (isEmpty(data["status"])) error["status"] = "status field is required";
+      if (typeof (data["status"]) !== "string") error["status"] = "status must be of type string";
+      if (data["status"].toLowerCase() !== "active" && data["status"].toLowerCase() !== "inactive") error["status"] = "status must be either 'active' or 'inactive'";
       
       let isError = !isEmpty(error);
       return {error, isError};

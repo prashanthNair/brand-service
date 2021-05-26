@@ -74,7 +74,7 @@ export class ProductController {
 
   async getAllBrandProducts(req: Request, res: Response, next: NextFunction) {
 
-    let { error, isError } = this.validator.validateGetProducts({ ...req.params, ...req.query });
+    let { error, isError } = this.validator.validateGetAllProducts({ ...req.params, ...req.query });
 
     if (isError) {
 
@@ -82,18 +82,15 @@ export class ProductController {
     } else {
 
       let inputData: object = { 
-        "subCategoryId": req.query.subCategoryId || "",
         "brandId": req.params.brandId,
-        "status": req.query.status || ""
+        "status": req.query.status,
+        "productType": req.query.productType
       };
-
-      // if (req.query.subCategoryId) inputData["subCategoryId"] = req.query.subCategoryId;
-      // if (req.query.status) inputData["status"] = req.query.status;
 
       this.productService.getProducts(inputData)
         .then(result => {
 
-          let _result = result[0][1];
+          let _result = result[0][0];
           HttpResponseMessage.successResponseWithData(res, "Sucessfull", _result);
         }).catch(err => {
 

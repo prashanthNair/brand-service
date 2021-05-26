@@ -47,15 +47,15 @@ const productRoute = (
     *         schema:
     *           type: string
     *       - in: query
-    *         name: subCategoryId
-    *         required: false
-    *         description: SubCategoryId of the product
+    *         name: productType
+    *         required: true
+    *         description: productType of the products, default is "Exclusive"
     *         schema:
     *           type: string
     *       - in: query
     *         name: status
-    *         required: false
-    *         description: status of the product "Active"/"Inactive"
+    *         required: true
+    *         description: status of the products "Active" or"Inactive"
     *         schema:
     *           type: string
     *     responses:
