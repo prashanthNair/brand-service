@@ -7,37 +7,44 @@ const kycRoute = (
     kycController: KycController = KycController.getInstance()
 )=>{
 
+  
 /**
  *  @swagger
+ * 
+ * 
  *  
- *  /api/v1/kyc:
+ *  /api/v1/brand/{brandId}/kyc:
  *      post:
  *          summary: Inserting new entry to kyc_details table
  *          description: Inserting Brand Kyc details
+ *          parameters:
+ *                - in: path
+ *                  name: brandId
+ *                  required: true
+ *                  description: BrandId of the Brand
+ *                  schema:
+ *                      type: string
  *          requestBody:
  *              content:
  *                  application/json:
  *                      schema:
  *                          properties:
- *                              KycNumber:
+ *                              kycNumber:
  *                                  type: string
  *                                  description: Kyc number of the user
- *                              BrandId:
- *                                  type: string
- *                                  description: Brand Id of user
- *                              KycType:
+ *                              kycType:
  *                                  type: string
  *                                  description: Type of user Kyc
- *                              KycName:
+ *                              kycName:
  *                                  type: string
  *                                  description: Name of user's Kyc Document
- *                              KycUrl:
+ *                              kycUrl:
  *                                  type: string
  *                                  description: Kyc image url
- *                              KycStatus:
+ *                              kycStatus:
  *                                  type: string
  *                                  description: Current Kyc status (Active/Inactive)
- *                              IsDefault:
+ *                              isDefault:
  *                                  type: string
  *                                  description: Is it default Kyc or not
  *          responses:
@@ -51,10 +58,19 @@ const kycRoute = (
  */
 
     app
-        .route('/api/v1/kyc')
+        .route('/api/v1/brand/:brandId/kyc')
         .post(
             async (req: Request, res: Response, next: NextFunction)=>{        
                 await kycController.postKycDetails(req,res,next);
+            }
+        )
+
+    
+    app
+        .route('/api/v1/brand/:brandId/kyc')
+        .get(
+            async (req: Request, res: Response, next: NextFunction)=>{
+                await kycController.getKycDetails(req,res,next);
             }
         )
 

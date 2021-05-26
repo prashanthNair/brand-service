@@ -27,27 +27,38 @@ class KycValidation implements IKycValidation {
 
         // add necessary validation rules like type | length | required etc
 
-        if(isEmpty(data.KycNumber)) error["KycNumber"] = "KYC Number field cannot be left blank";
-        if(typeof(data.KycNumber) !== "string" ) error["KycNumber"] = "KYC Number must be of type string";
+        if(isEmpty(data.kycNumber)) error["kycNumber"] = "KYC Number field cannot be left blank";
+        if(typeof(data.kycNumber) !== "string" ) error["kycNumber"] = "KYC Number must be of type string";
 
-        if(isEmpty(data.BrandId)) error["BrandId"] = "Brand ID field cannot be left blank";
-        if(typeof(data.BrandId) !== "string" ) error["BrandId"] = "Brand ID must be of type string";
+        if(isEmpty(data.brandId)) error["brandId"] = "Brand ID field cannot be left blank";
+        if(typeof(data.brandId) !== "string" ) error["brandId"] = "Brand ID must be of type string";
 
-        if(isEmpty(data.KycType)) error["KycType"] = "Kyc Type field cannot be left blank";
-        if(typeof(data.KycType) !== "string" ) error["KycType"] = "Kyc Type must be of type string";
+        if(isEmpty(data.kycType)) error["kycType"] = "Kyc Type field cannot be left blank";
+        if(typeof(data.kycType) !== "string" ) error["kycType"] = "Kyc Type must be of type string";
 
-        if(isEmpty(data.KycName)) error["KycName"] = "Kyc Name field cannot be left blank";
-        if(typeof(data.KycName) !== "string" ) error["KycName"] = "Kyc Name must be of type string";
+        if(isEmpty(data.kycName)) error["kycName"] = "Kyc Name field cannot be left blank";
+        if(typeof(data.kycName) !== "string" ) error["kycName"] = "Kyc Name must be of type string";
 
-        if(isEmpty(data.KycUrl)) error["KycUrl"] = "Kyc Url field cannot be left blank";
-        if(typeof(data.KycUrl) !== "string" ) error["KycUrl"] = "Kyc Url must be of type string";
+        if(isEmpty(data.kycUrl)) error["kycUrl"] = "Kyc Url field cannot be left blank";
+        if(typeof(data.kycUrl) !== "string" ) error["kycUrl"] = "Kyc Url must be of type string";
 
-        if(isEmpty(data.KycStatus)) error["KycStatus"] = "Kyc Status field cannot be left blank";
-        if(typeof(data.KycStatus) !== "string" ) error["KycStatus"] = "Kyc Status must be of type string";
+        if(isEmpty(data.kycStatus)) error["kycStatus"] = "Kyc Status field cannot be left blank";
+        if(typeof(data.kycStatus) !== "string" ) error["kycStatus"] = "Kyc Status must be of type string";
 
 
-        if(isEmpty(data.IsDefault)) error["IsDefault"] = "IsDefault field cannot be left blank";
-        if(typeof(data.IsDefault) !== "string" ) error["IsDefault"] = "IsDefault must be of type string";
+        if(isEmpty(data.isDefault)) error["isDefault"] = "IsDefault field cannot be left blank";
+        if(typeof(data.isDefault) !== "string" ) error["isDefault"] = "IsDefault must be of type string";
+
+        let isError = !isEmpty(error);
+        return {error, isError};
+    }
+
+    public validateGetKycDetailsInput = (brandId: string): object =>{
+
+        let error = {};
+
+        if(isEmpty(brandId)) error["brandId"] = "Brand ID field cannot be left blank";
+        if(typeof(brandId) !== "string" ) error["brandId"] = "Brand ID must be of type string";
 
         let isError = !isEmpty(error);
         return {error, isError};
