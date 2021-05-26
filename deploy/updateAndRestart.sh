@@ -12,8 +12,8 @@ git clone git@gitlab.com:migobucks_personal/migobucksbrandservice.git
 
 #source the nvm file. In an non
 #If you are not using nvm, add the actual path like
-# PATH=/home/ubuntu/node/bin:$PATH
-source /home/ubuntu/.nvm/nvm.sh
+ PATH=/home/ubuntu/node/bin:$PATH
+#source /home/ubuntu/.nvm/nvm.sh
 
 # stop the previous pm2
 pm2 kill
