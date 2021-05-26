@@ -22,7 +22,7 @@ git clone https://gitlab.com/migobucks_personal/migobucksbrandservice.git
 
 #pm2 needs to be installed globally as we would be deleting the repo folder.
 # this needs to be done only once as a setup script. 
-sudo npm install pm2 -g
+npm install pm2 -g
 # starting pm2 daemon
 pm2 status
 
@@ -30,7 +30,9 @@ cd /home/ubuntu/migobucksbrandservice
 
 #install npm packages
 echo "Running npm install"
-sudo npm install
+npm install
 
 #Restart the node server
-sudo npm start
+npm run build
+#Restart the node server
+npm start
