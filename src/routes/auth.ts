@@ -62,29 +62,7 @@ const authRoutes = (
         await authController.postUser(req, res, next)
     );
 
-  /**
-   * @swagger
-   * /api/v1/auth/user:
-   *   get:
-   *     summary: Show user details.
-   *     parameters:
-   *       - in: body
-   *         name: id
-   *         required: true
-   *         description: ID of the User account
-   *         schema:
-   *           type: string
-   *     responses:
-   *       201:
-   *         $ref: '#/components/responses/Success'
-   *       500:
-   *         $ref: '#/components/responses/FailureError'
-   *       400:
-   *         $ref: '#/components/responses/BadRequest'
-   *       
-   *                 
-  */
-
+  
   /**
    * @swagger
    * /api/v1/auth/user/{email}:

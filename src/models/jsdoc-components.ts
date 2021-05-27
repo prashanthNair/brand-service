@@ -302,6 +302,63 @@
  *            type: string
  *            description: Status of the Role
  *         
+ *      Post_Product:
+ *        type: object
+ *        properties:
+ *          categoryId:
+ *            type: string
+ *            description: category ID
+ *          productCategoryId:
+ *            type: string
+ *            description: product category ID
+ *          brandId:
+ *            type: string
+ *            description: brand ID
+ *          productName:
+ *            type: string
+ *            description: product name
+ *          title:
+ *            type: string
+ *            description: title
+ *          keyPoints:
+ *            type: string
+ *            description: key points
+ *          mrp:
+ *            type: number
+ *            description: mrp
+ *          sellingPrice:
+ *            type: number
+ *            description: selling price
+ *          loyaltyPercentage:
+ *            type: number
+ *            description: loyalty percentage
+ *          buddyMargin:
+ *            type: number
+ *            description: bbuddy margin
+ *          tag:
+ *            type: string
+ *            description: tag name
+ *          isVeg:
+ *            type: boolean
+ *            description: is vegitarian
+ *          ageGroup:
+ *            type: number
+ *            description: age group
+ *          weight:
+ *            type: string
+ *            description: weight
+ *          manufacturedDate:
+ *            type: string
+ *            description: manufactured date
+ *          expiryDate:
+ *            type: string
+ *            description: expiry date
+ *          productBrand:
+ *            type: string
+ *            description: product brand
+ *          currency:
+ *            type: string
+ *            description: currency
  */
 /**
  * @swagger
@@ -336,6 +393,15 @@
  *            type: string
  *            description: Role of the buddy
  *         
+ *      Get_products:
+ *        type: object
+ *        properties:
+ *          subCategoryId:
+ *            type: staring
+ *            description: subCategoryId of products
+ *          status: 
+ *             type: string
+ *             description: Current status of products "Active"/"Inactive"
  */
 /**
  * @swagger
@@ -403,4 +469,5 @@
  *            schema:
  *              $ref: '#/components/schemas/FailureResponse'
  *      
+ *
  */
