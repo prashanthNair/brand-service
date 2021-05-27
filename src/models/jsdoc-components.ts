@@ -156,6 +156,12 @@
  *          buddyRole:
  *            type: string
  *            description: Role of the buddy user
+ *      Post_Brand_Subscriptions:
+ *        type: object
+ *        properties:
+ *          subscriptionId:
+ *            type: string
+ *            description: subscriptionId of the selected subscription
  */
 /**
  * @swagger
@@ -402,6 +408,12 @@
  *          status: 
  *             type: string
  *             description: Current status of products "Active"/"Inactive"
+ *      Put_Brand_Subscriptions:
+ *        type: object
+ *        properties:
+ *          subscriptionStatus:
+ *            type: string
+ *            description: ACTIVE or INACTIVE based on subscribing or unsubscribing
  */
 /**
  * @swagger
