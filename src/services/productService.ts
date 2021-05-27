@@ -18,7 +18,7 @@ class ProductService implements IProductService {
   public async postProduct(productData: Product): Promise<Product> {
     try {
       
-      let sql = `CALL PostProduct(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+      let sql = `CALL PostProduct(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`; // dynamic query in progress..
       let result = await db.query(sql, Object.values(productData));
       console.log(result);
       return result;
@@ -31,15 +31,15 @@ class ProductService implements IProductService {
 
   public getProducts(input: object): Promise<Product> {
 
-    let sql = `CALL GetAllProducts(?,?,?)`; // procedure need updates.
+    let sql = `CALL GetAllProducts(?,?,?)`;
     return db.query(sql, Object.values(input));
 
   }
   
-  public getProduct(productId: string): Promise<Product> {
+  public getProduct(brandId: string, productId: string): Promise<Product> {
 
-      let sql = `CALL Get_Product(?)`; // procedure need updates.
-      return db.query(sql, [productId]);
+      let sql = `CALL Get_Product(?,?)`;
+      return db.query(sql, [brandId, productId]);
 
   }
 

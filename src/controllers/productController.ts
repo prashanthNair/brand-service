@@ -107,9 +107,10 @@ export class ProductController {
     if (isError) {
       HttpResponseMessage.sendErrorResponse(res, "input validation error", error)
     } else {
+      let brandId = req.params.brandId;
       let productId = req.params.productId;
 
-      this.productService.getProduct(productId)
+      this.productService.getProduct(brandId, productId)
         .then(result => {
 
           let _result = result[0][0];

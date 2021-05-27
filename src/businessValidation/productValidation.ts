@@ -97,6 +97,11 @@ class ProductValidation implements IProductValidation {
 
     public validateGetSingleProduct = (data: object) => {
       let error = {};
+
+      if(isEmpty(data["brandId"])) error["brandId"] = "brandId field is required";
+      if(typeof(data["brandId"]) !== "string") error["brandId"] = "brandId must be of type string";
+  //  if(!validator.isLength(data.brandId, {min:1, max: 30})) error["brandId"] = "brandId length exceeded";
+
       
       if(isEmpty(data["productId"])) error["productId"] = "productId field is required";
       if(typeof(data["productId"]) !== "string") error["productId"] = "productId must be of type string";
