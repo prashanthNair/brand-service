@@ -2,10 +2,10 @@
 
 # any future command that fails will exit the script
 set -e
- 
-# Install Node
-sudo apt-get install -y nodejs
 
+# Install Node
+# sudo apt-get install -y nodejs
+kill -9 $(lsof -t -i:3000)
 # Delete the old repo
 rm -rf /home/ubuntu/migobucksbrandservice
 
