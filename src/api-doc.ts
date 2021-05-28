@@ -11,7 +11,7 @@ export const swaggerDocument = {
   },
   servers:[
     {
-      "url" : "http://http://3.108.15.22:3000/api/v1",
+      "url" : "http://3.108.15.22:3000/api/v1",
       "description" : "Development server"
     }
   ]
