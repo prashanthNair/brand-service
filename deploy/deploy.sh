@@ -18,7 +18,7 @@ echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >> ~/.ssh/config
 # comma seperated values of ip addresses.
 DEPLOY_SERVERS=$DEPLOY_SERVERS
 
-echo "ALL_SERVERS $DEPLOY_SERVERS"
-  ssh ubuntu@3.108.15.22 'bash -s' < ./deploy/updateAndRestart.sh
+echo "ALL_SERVERS"
+  ssh ubuntu@${DEPLOY_SERVERS} 'bash -s' < ./deploy/updateAndRestart.sh
 
 
