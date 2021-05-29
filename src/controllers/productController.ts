@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { Product } from "../models/product";
+import { GetAllProductsInput, GetBrandProductInput, Product } from "../models/product";
 import { IProductService } from "../services/IProductService";
 import { ProductService } from "../services/productService";
 import { HttpResponseMessage } from "../utils/httpResponseMessage";
@@ -81,10 +81,9 @@ export class ProductController {
       HttpResponseMessage.sendErrorResponse(res, "input validation error", error)
     } else {
 
-      let inputData: object = { 
+      let inputData: GetAllProductsInput = { 
         "brandId": req.params.brandId,
-        "status": req.query.status,
-        "productType": req.query.productType
+        "status": req.query.status
       };
 
       this.productService.getProducts(inputData)
@@ -107,10 +106,12 @@ export class ProductController {
     if (isError) {
       HttpResponseMessage.sendErrorResponse(res, "input validation error", error)
     } else {
-      let brandId = req.params.brandId;
-      let productId = req.params.productId;
+      let inputData: GetBrandProductInput = {
+         brandId : req.params.brandId,
+         productId : req.params.productId
+      }
 
-      this.productService.getProduct(brandId, productId)
+      this.productService.getProduct(inputData)
         .then(result => {
 
           let _result = result[0][0];

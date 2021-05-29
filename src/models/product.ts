@@ -19,6 +19,16 @@ export class Product {
   currency: string;
 }
 
+export class GetAllProductsInput {
+  brandId: string;
+  status: string;
+}
+
+export class GetBrandProductInput{
+  brandId: string;
+  productId: string;
+}
+
 export class Plan {
   PlanName:string;
   Plan:string;
