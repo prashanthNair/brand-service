@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import { BrandRegisterModel } from "../models/brandRegisterModel";
 import { BrandService } from "../services/brandService";
+import { IBrandBusinessValidation } from "../businessValidation/IBrandBusinessValidation";
+import { BrandBusinessValidation } from "../businessValidation/brandBusinessValidation";
 import { IBrandService } from "../services/IBrandService";
 import { HttpResponseMessage } from "../utils/httpResponseMessage";
 export class BrandController {
@@ -8,21 +10,23 @@ export class BrandController {
 
     private static instance: BrandController = null;
     private brandService = null;
-
+    private validator = null;
 
     /**
      * To get singleton instance
      *
-     * @param  {object} productService
+     * @param  {object} brandService
      */
 
     public static getInstance(
-        authService: IBrandService = BrandService.getInstance()
+        brandService: IBrandService = BrandService.getInstance(),
+        brandValidator: IBrandBusinessValidation = BrandBusinessValidation.getInstance()
     ) {
         if (!BrandController.instance) {
             BrandController.instance = new BrandController();
         }
-        BrandController.instance.brandService = authService;
+        BrandController.instance.brandService = brandService;
+        BrandController.instance.validator = brandValidator;
         return BrandController.instance;
     }
 
@@ -37,6 +41,13 @@ export class BrandController {
  */
 
     public async postBrandRegister(req: Request, res: Response, next: NextFunction) {
+     // validate api input:
+    let { error, isError } = this.validator.validatePostBrandInput({ ...req.body, ...req.params });
+
+    if (isError) {
+      HttpResponseMessage.sendErrorResponse(res, "input validation error", error)
+    } else {
+
         let signupData: BrandRegisterModel = {
             DomainID: req.body.DomainID,
             CategoryId: req.body.CategoryId,
@@ -63,10 +74,16 @@ export class BrandController {
         }).catch(error => {
             HttpResponseMessage.sendErrorResponse(error, "Transaction Failed");
         })
+      }
     }
 
-    public async patchBrandUpdate(req: Request, res: Response, next: NextFunction) {
-        
+    public async patchBrandUpdate(req: Request, res: Response, next: NextFunction) {        
+         // validate api input:
+    let { error, isError } = this.validator.validatePatchBrandInput(req.body.BrandID,{ ...req.body, ...req.params });
+
+    if (isError) {
+      HttpResponseMessage.sendErrorResponse(res, "input validation error", error)
+    } else {
         let signupData: BrandRegisterModel = {
             DomainID: req.body.DomainID,
             CategoryId: req.body.CategoryId,
@@ -95,9 +112,17 @@ export class BrandController {
         }).catch(error => {
             HttpResponseMessage.sendErrorResponse(error, "Transaction Failed");
         })
+      }
     }
 
     public async getAllProductCategory(req: Request, res: Response, next: NextFunction) {
+    // validate api input:
+    let { error, isError } = this.validator.validateGetAllProductCategoryInput({ ...req.body, ...req.params });
+
+    if (isError) {
+      HttpResponseMessage.sendErrorResponse(res, "input validation error", error)
+    } else {
+
         try {
           const result = await this.brandService.getAllProductCategory(req.body.CategoryId); // :TODO remove hardcode
           
@@ -110,8 +135,16 @@ export class BrandController {
           HttpResponseMessage.sendErrorResponse(res, err);
         }
       }
+      }
 
       public async getAllCategory(req: Request, res: Response, next: NextFunction) {
+      // validate api input:
+      let { error, isError } = this.validator.validateGetAllCategoryInput({ ...req.body, ...req.params });
+
+    if (isError) {
+      HttpResponseMessage.sendErrorResponse(res, "input validation error", error)
+    } else {
+
         try {
           const result = await this.brandService.getAllCategory(req.body.DomainID); // :TODO remove hardcode
           if (result) {
@@ -122,6 +155,7 @@ export class BrandController {
         } catch (err) {
           HttpResponseMessage.sendErrorResponse(res, err);
         }
+      }
       }
 
       public async getAllDomains(req: Request, res: Response, next: NextFunction) {
