@@ -7,8 +7,10 @@
  *        type: object
  *        properties:
  *          subscriptionId:
- *            type: string
- *            description: subscriptionId of the selected subscription
+ *            type: array
+ *            items: 
+ *              type: string
+ *            description: array of subscriptionId of the selected subscription
  */
 /**
  * @swagger

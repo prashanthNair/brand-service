@@ -79,14 +79,18 @@ class SubscriptionController {
         if(isError){
             HttpResponseMessage.validationErrorWithData(res, "input validation error", error)
         }else{
+
+            let sub_id = req.body.subscriptionId.join(',');
+                console.log(typeof(sub_id))
+                
             let brandSubData: PostBrandSubscription = {
                 brandId: req.params.brandId,
-                subscriptionId: req.body.subscriptionId
+                subscriptionId: sub_id
             };
 
             this.subscriptionService.postBrandSubscription(brandSubData)
                 .then(result => {
-                    HttpResponseMessage.successResponse(res, "Sucessfull");
+                    HttpResponseMessage.successResponseWithData(res, "Sucessfull", result[0][0]);
                 }).catch(err => {
                     HttpResponseMessage.sendErrorResponse(res, "Transaction Failed", err.message);
                 });

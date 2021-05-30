@@ -1,5 +1,5 @@
 import validator from 'validator';
-import { PostBrandSubscription, UpdateBrandSubscription } from '../models/subscription';
+import { PostBrandSubscription, subscription, UpdateBrandSubscription } from '../models/subscription';
 import { isEmpty } from './isEmpty';
 import { ISubscriptionValidation } from './ISubscriptionValidation';
 
@@ -18,7 +18,7 @@ class SubscriptionValidation implements ISubscriptionValidation{
         let error = {};
 
         if (isEmpty(data["subscriptionId"])) error["subscriptionId"] = "subscriptionId required";
-        if (typeof (data["subscriptionId"]) !== "string") error["subscriptionId"] = "subscriptionId must be of type string";
+        else if (typeof (data["subscriptionId"]) !== "string") error["subscriptionId"] = "subscriptionId must be of type string";
 
         let isError = !isEmpty(error);
 
@@ -41,10 +41,16 @@ class SubscriptionValidation implements ISubscriptionValidation{
         let error = {};
 
         if(isEmpty(data.brandId)) error["brandId"] = "brandId is required";
-        if(typeof(data.brandId) !== "string") error["brandId"]= "brandId must be of type string";
+        else if(typeof(data.brandId) !== "string") error["brandId"]= "brandId must be of type string";
 
         if(isEmpty(data.subscriptionId)) error["subscriptionId"] = "subscriptionId is required";
-        if(typeof(data.subscriptionId) !== "string") error["subscriptionId"]= "subscriptionId must be of type string";
+        else if(!Array.isArray(data.subscriptionId)) error["subscriptionId"] = "subscriptionId must of type array";
+        else{
+            data.subscriptionId.map((sub, i) => {
+                if(typeof(sub) !== "string") error["subscriptionId"] = "subscriptionId must be array of strings";
+            })
+        }
+        // if(typeof(data.subscriptionId) !== "string") error["subscriptionId"]= "subscriptionId must be of type string";
 
         let isError = !isEmpty(error);
         return {error, isError};
@@ -55,13 +61,13 @@ class SubscriptionValidation implements ISubscriptionValidation{
         let error = {};
 
         if(isEmpty(data.brandId)) error["brandId"] = "brandId in URL parameter is required";
-        if(typeof(data.brandId) !== "string") error["brandId"]= "brandId must be of type string";
+        else if(typeof(data.brandId) !== "string") error["brandId"]= "brandId must be of type string";
 
         if(isEmpty(data.subscriptionId)) error["subscriptionId"] = "subscriptionId is required";
-        if(typeof(data.subscriptionId) !== "string") error["subscriptionId"]= "subscriptionId must be of type string";
+        else if(typeof(data.subscriptionId) !== "string") error["subscriptionId"]= "subscriptionId must be of type string";
 
         if(isEmpty(data.subscriptionStatus)) error["subscriptionStatus"] = "subscriptionStatus is required"
-        if(data.subscriptionStatus !== "ACTIVE" && data.subscriptionStatus !== "INACTIVE") error["subscriptionStatus"] = "subscriptionStatus should be either ACTIVE/INACTIVE";
+        else if(data.subscriptionStatus.toLowerCase() !== "active" && data.subscriptionStatus.toLowerCase() !== "inactive") error["subscriptionStatus"] = "subscriptionStatus should be either ACTIVE/INACTIVE";
     
         let isError = !isEmpty(error);
         return {error, isError};
