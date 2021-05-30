@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "ts-node ./src/server.ts",
-    "start": "nodemon ./dist/server.js"
+    "start": "node ./dist/server.js"
   },
   "keywords": [
     "Migobucks"
@@ -27,7 +27,6 @@
     "mysql": "^2.17.1",
     "mysql2": "^2.1.0",
     "node-gyp": "^5.0.7",
-    "nodemon": "^1.18.9",
     "nyc": "^14.1.1",
     "paypal-rest-sdk": "^1.8.1",
     "save": "^2.4.0",
@@ -37,8 +36,9 @@
   },
   "devDependencies": {
     "@types/node": "^12.12.20",
+    "nodemon": "^1.19.4",
     "sinon": "^7.5.0",
-    "ts-node": "^8.4.1",
+    "ts-node": "^8.10.2",
     "typescript": "^3.9.7",
     "typings": "^2.1.1"
   }
