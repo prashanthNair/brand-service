@@ -11,11 +11,11 @@ export class HttpResponseMessage {
      * @param  {object}   res
      */
 
-    public static successResponse(res: any, message: string) { 
+    public static successResponse(response: Response,result?, message?: string) { 
         let resData = new HttpResponse();
         resData = { success: true, status: 1, message, data: [] };
         Logger.error(resData.message);
-        return res.status(200).json(resData);
+        return response.status(200).json(resData);
     };
 
      /**

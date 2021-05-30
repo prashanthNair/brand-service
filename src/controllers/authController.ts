@@ -3,11 +3,7 @@ import { IAuthService } from "../services/IAuthService";
 import { AuthService } from "../services/authService";
 import { HttpResponseMessage } from "../utils/httpResponseMessage";
 import { Update, User } from "../models/user";
-
-class SuccessResponse {
-  status:Number;
-  success:Boolean;
-}
+ 
 
 export class AuthController {
   private constructor() {}
@@ -73,24 +69,11 @@ export class AuthController {
   
   public async postUser(req: Request, res: Response, next: NextFunction) {
 
-      let userData: User = {
-        UserName: req.body.userName,
-        FirstName: req.body.firstName,
-        LastName: req.body.lastName,
-        Password: req.body.password,
-        Location: req.body.location,
-        IsActive: true,
-        State: req.body.state,
-        Country: req.body.country,
-        Email: req.body.email,
-        MobileNum: req.body.mobileNum,
-        Created_date: null,
-        
-      };
-      const result = await this.authService.postUser(userData);
+     
+      const result = await this.authService.postUser(req.params.email);
 
       if (result) {
-        HttpResponseMessage.successResponse(res, "Sucessfull");
+        HttpResponseMessage.successResponse(res,result, "Sucessfull");
       } else {
         HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
       }
@@ -137,7 +120,7 @@ export class AuthController {
       const result = await this.authService.update(userData);
 
       if (result) {
-        HttpResponseMessage.successResponse(res, "Sucessfully updated");
+        HttpResponseMessage.successResponse(res,result, "Sucessfully updated");
       } else {
         HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
       }
