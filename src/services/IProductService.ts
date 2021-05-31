@@ -1,10 +1,9 @@
 import { Integer } from "aws-sdk/clients/apigateway";
-import { Product } from "../models/product";
+import { GetAllProductsInput, GetBrandProductInput, Product } from "../models/product";
 
 export interface IProductService {
   postProduct(productData: Product);
-  getProduct(productId: Integer): Promise<Product>;
-  getProducts(businessId: Integer): Promise<Product>;
+  getProduct(inputObj: GetBrandProductInput): Promise<Product>;
+  getProducts(inputObj: GetAllProductsInput): Promise<Product>;
   
 }
- 
