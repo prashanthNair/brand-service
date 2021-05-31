@@ -1,6 +1,14 @@
 import { Request, Response, NextFunction } from "express";
+import { BankValidation } from "../businessValidation/bankValidation";
+import { IBankValidation } from "../businessValidation/IBankvalidation";
+import { IKycValidation } from "../businessValidation/IKycValidation";
+import { KycValidation } from "../businessValidation/kycValidation";
+import { BankDetails } from "../models/bankDetails";
 import { BrandRegisterModel } from "../models/brandRegisterModel";
+import { KycDetails, KycDetailsUpdateModel } from "../models/kycDetails";
+import { BankService } from "../services/bankService";
 import { BrandService } from "../services/brandService";
+import { IBankService } from "../services/IBankService";
 import { IBrandService } from "../services/IBrandService";
 import { HttpResponseMessage } from "../utils/httpResponseMessage";
 export class BrandController {
@@ -8,6 +16,8 @@ export class BrandController {
 
     private static instance: BrandController = null;
     private brandService = null;
+    private bankValidator = null;
+    private kycValidator = null;
 
 
     /**
@@ -17,12 +27,14 @@ export class BrandController {
      */
 
     public static getInstance(
-        authService: IBrandService = BrandService.getInstance()
+        brandService: IBrandService = BrandService.getInstance(),
+        bankValidator: IBankValidation = BankValidation.getInstance(),
+        kycValidator: IKycValidation = KycValidation.getInstance()
     ) {
         if (!BrandController.instance) {
             BrandController.instance = new BrandController();
         }
-        BrandController.instance.brandService = authService;
+        BrandController.instance.brandService = brandService;
         return BrandController.instance;
     }
 
@@ -136,5 +148,126 @@ export class BrandController {
           HttpResponseMessage.sendErrorResponse(res, err);
         }
       }
+
+      public async postKycDetails(req: Request, res: Response, next: NextFunction) {
+        //validate api inputs
+
+
+        let { error, isError } = this.kycValidator.validatePostKycDetailsInput({ ...req.body, ...req.params });
+
+        if (isError) {
+            HttpResponseMessage.validationErrorWithData(res, "input validation error", error)
+        } else {
+            let KycDetailsInputModel: KycDetails = {
+
+                kycNumber: req.body.kycNumber,
+                brandId: req.params.brandId,
+                kycType: req.body.kycType,
+                kycName: req.body.kycName,
+                kycUrl: req.body.kycUrl,
+                kycStatus: req.body.kycStatus,
+                isDefault: req.body.isDefault
+
+            }
+
+            const result = await this.brandService.postKycDetails(KycDetailsInputModel);
+
+            if (result) {
+                HttpResponseMessage.successResponse(res, "Kyc Details inserted Sucessfully");
+            } else {
+                HttpResponseMessage.sendErrorResponse(res, "Kyc Details insertion Failed");
+            }
+        }
+    }
+
+    public async getKycDetails(req: Request, res: Response, next: NextFunction) {
+
+        let { error, isError } = this.kycValidator.validateGetKycDetailsInput(req.params.brandId);
+
+        if (isError) {
+            HttpResponseMessage.validationErrorWithData(res, "input validation error", error)
+        } else {
+            let brandId: string = req.params.brandId;
+
+            const brand = await this.brandService.getBrand(brandId);
+
+            if (!brand.errno) {
+
+                const result = await this.brandService.getKycDetails(brandId);
+                
+                if (result[0][0].length!==0) {
+                    let _result = result[0][0];
+                    HttpResponseMessage.successResponseWithData(res, "Fetched Kyc Details Sucessfully", _result);
+                } else {
+                    HttpResponseMessage.sendErrorResponse(res, "Kyc Details is Not Found for current Brand");
+                }
+
+            } else {
+
+                HttpResponseMessage.sendErrorResponse(res, "Fetching Kyc Details is Failed", brand);
+
+            }
+        }
+    }
+
+
+    public async updateKycDetails(req: Request, res: Response, next: NextFunction) {
+        //validate api inputs
+
+        
+        let { error, isError } = this.kycValidator.validateUpdateKycDetailsInput(req.body);
+
+        if (isError) {
+            HttpResponseMessage.validationErrorWithData(res, "input validation error", error)
+        } else {
+            let KycDetailsInputModel: KycDetailsUpdateModel = {
+
+                kycNumber: req.body.kycNumber,
+                kycType: req.body.kycType,
+                kycName: req.body.kycName,
+                kycUrl: req.body.kycUrl,
+                kycStatus: req.body.kycStatus,
+                isDefault: req.body.isDefault
+
+            }
+
+            const result = await this.brandService.updateKycDetails(KycDetailsInputModel);
+
+            if (result) {
+                HttpResponseMessage.successResponse(res, "Kyc Details updated Sucessfully");
+            } else {
+                HttpResponseMessage.sendErrorResponse(res, "Kyc Details updation Failed");
+            }
+        }
+    }
+
+    public async postBankDetails(req: Request, res: Response, next: NextFunction) {
+      //validate api inputs
+      let { error, isError } = this.bankValidator.validatePostBankDetailsInput(req.body);
+
+      if (isError) {
+          HttpResponseMessage.validationErrorWithData(res, "input validation error", error)
+      } else {
+          let bankDetailsInputModel: BankDetails = {
+              
+              BrandId: req.body.BrandId,
+              BankType: req.body.BankType,
+              BankName: req.body.BankName,
+              IfscCode: req.body.IfscCode,
+              BankUrl: req.body.BankUrl,
+              BankStatus: req.body.BankStatus,
+              IsDefault: req.body.IsDefault,
+              BankNumber: req.body.BankNumber
+          };
+
+          const result = await this.brandService.postBankDetails(bankDetailsInputModel);
+
+          if (result) {
+              HttpResponseMessage.successResponse(res, "Bank Account Details inserted Sucessfully");
+          } else {
+              HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
+          }
+      }
+  }
 
 }
