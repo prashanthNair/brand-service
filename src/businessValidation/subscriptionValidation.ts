@@ -67,7 +67,7 @@ class SubscriptionValidation implements ISubscriptionValidation{
         else if(typeof(data.subscriptionId) !== "string") error["subscriptionId"]= "subscriptionId must be of type string";
 
         if(isEmpty(data.subscriptionStatus)) error["subscriptionStatus"] = "subscriptionStatus is required"
-        else if(data.subscriptionStatus.toLowerCase() !== "active" && data.subscriptionStatus.toLowerCase() !== "inactive") error["subscriptionStatus"] = "subscriptionStatus should be either ACTIVE/INACTIVE";
+        else if(data.subscriptionStatus !== "ACTIVE" && data.subscriptionStatus !== "INACTIVE") error["subscriptionStatus"] = "subscriptionStatus should be either ACTIVE/INACTIVE";
     
         let isError = !isEmpty(error);
         return {error, isError};
