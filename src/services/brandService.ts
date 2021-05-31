@@ -43,12 +43,11 @@ export class BrandService implements IBrandService {
         } catch (err) {
             return err;
         }
-
     }
 
     public async update(BrandID:string,updateData: BrandRegisterModel): Promise<Object> {
         try{
-          let sql = `CALL Update_Brand(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+          let sql = `CALL Update_Brand(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
           let result = await db.query(
             sql,[
                 BrandID,
@@ -87,7 +86,6 @@ export class BrandService implements IBrandService {
       return null;
     }
   }
-
       
   public async getAllDomains(): Promise<BrandRegisterModel> {
     try {
@@ -109,4 +107,13 @@ export class BrandService implements IBrandService {
     }
   }
 
+  public async getAllSubscriptions(): Promise<BrandRegisterModel> {
+    try {
+      let sql = `CALL Getallsubscriptions`;
+      const [rows, fields] = await db.query(sql);
+      return rows;
+    } catch (error) {
+      return null;
+    }
+  }
 }

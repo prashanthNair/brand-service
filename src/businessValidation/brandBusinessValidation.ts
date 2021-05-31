@@ -1,5 +1,6 @@
 import validator from 'validator';
 import { BrandRegisterModel } from "../models/brandRegisterModel";
+import { BrandUpdateModel } from "../models/brandUpdateModel";
 import { IBrandBusinessValidation } from "./IBrandBusinessValidation";
 import { isEmpty } from './isEmpty';
 
@@ -84,7 +85,7 @@ export class BrandBusinessValidation implements IBrandBusinessValidation {
         return {error, isError};
     }
 
-    public validatePatchBrandInput = (BrandID: string, data: BrandRegisterModel) : object  => {
+    public validatePatchBrandInput = (BrandID: string, data: BrandUpdateModel) : object  => {
       let error = {};
       
       if(isEmpty(BrandID)) error["BrandID"] = "BrandID field is required";
@@ -146,8 +147,6 @@ export class BrandBusinessValidation implements IBrandBusinessValidation {
       if(isEmpty(data.RegisteredType)) error["RegisteredType"] = "RegisteredType field is required";
       if(typeof(data.RegisteredType) !== "string") error["RegisteredType"] = "RegisteredType must be of type string";
 
-      if(isEmpty(data.AccountPassword)) error["AccountPassword"] = "AccountPassword field is required";
-      if(typeof(data.AccountPassword) !== "string") error["AccountPassword"] = "AccountPassword must be of type string";
 
       let isError = !isEmpty(error);
       return {error, isError};

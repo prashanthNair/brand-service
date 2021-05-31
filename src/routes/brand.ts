@@ -213,19 +213,9 @@ export const brandRoutes = (
    
   /**
    * @swagger
-   * /getallcategory:
-   *   post:
-   *     summary: Get all Categories.
-   *     requestBody:
-   *       required: true
-   *       content:
-   *         application/json:
-   *           schema:
-   *             type: object
-   *             properties:
-   *               DomainID:
-   *                 type: string
-   *                 description: The Id assigned to specific Domain.        
+   * /getallcategories/{DomainID}:
+   *   get:
+   *     summary: Get all Categories.      
    *     responses:
    *       200:
    *         description: All Categories successfully retrieved        
@@ -238,28 +228,17 @@ export const brandRoutes = (
   */
 
    app
-   .route("/api/v1/brand/getallcategory")
-   .post(
+   .route("/api/v1/brand/getallcategories/:DomainID")
+   .get(
      (req: Request, res: Response, next: NextFunction) =>
      brandController.getAllCategory(req, res, next)
    );
 
-
   /**
    * @swagger
-   * /getallproductcategory:
-   *   post:
-   *     summary: Get all Product Categories.
-   *     requestBody:
-   *       required: true
-   *       content:
-   *         application/json:
-   *           schema:
-   *             type: object
-   *             properties:
-   *               CategoryId:
-   *                 type: string
-   *                 description: The Id assigned to specific Category.        
+   * /getallproductcategories/{CategoryId}:
+   *   get:
+   *     summary: Get all Product Categories.       
    *     responses:
    *       200:
    *         description: All Product Categories successfully retrieved        
@@ -272,11 +251,36 @@ export const brandRoutes = (
   */
 
    app
-   .route("/api/v1/brand/getallproductcategory")
-   .post(
+   .route("/api/v1/brand/getallproductcategories/:CategoryId")
+   .get(
      (req: Request, res: Response, next: NextFunction) =>
      brandController.getAllProductCategory(req, res, next)
    );
 
+
+
+  /**
+   * @swagger
+   * /brand/getallsubscriptions:
+   *   get:
+   *     summary: Get all Subscriptions.
+   *        
+   *     responses:
+   *       200:
+   *         description: All Subscriptions successfully retrieved        
+   *       500:
+   *         $ref: '#/components/responses/FailureError'
+   *       400:
+   *         $ref: '#/components/responses/BadRequest'
+   *       
+   *                 
+  */
+
+   app
+   .route("/api/v1/brand/getallsubscriptions")
+   .get(
+     (req: Request, res: Response, next: NextFunction) =>
+     brandController.getAllSubscriptions(req, res, next)
+   );   
   
 }

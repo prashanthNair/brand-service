@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { BrandRegisterModel } from "../models/brandRegisterModel";
+import { BrandUpdateModel } from "../models/brandUpdateModel";
 import { BrandService } from "../services/brandService";
 import { IBrandBusinessValidation } from "../businessValidation/IBrandBusinessValidation";
 import { BrandBusinessValidation } from "../businessValidation/brandBusinessValidation";
@@ -84,7 +85,7 @@ export class BrandController {
     if (isError) {
       HttpResponseMessage.sendErrorResponse(res, "input validation error", error)
     } else {
-        let signupData: BrandRegisterModel = {
+        let signupData: BrandUpdateModel = {
             DomainID: req.body.DomainID,
             CategoryId: req.body.CategoryId,
             Category: req.body.Category,
@@ -102,8 +103,7 @@ export class BrandController {
             Designation: req.body.Designation,
             UserEmailId: req.body.UserEmailId,
             RegBusinessName: req.body.RegBusinessName,
-            RegisteredType: req.body.RegisteredType,
-            AccountPassword: req.body.AccountPassword
+            RegisteredType: req.body.RegisteredType
         };
         const result = this.brandService.update(req.body.BrandID,signupData).then(result => {
             console.log(result);
@@ -124,7 +124,7 @@ export class BrandController {
     } else {
 
         try {
-          const result = await this.brandService.getAllProductCategory(req.body.CategoryId); // :TODO remove hardcode
+          const result = await this.brandService.getAllProductCategory(req.params.CategoryId); // :TODO remove hardcode
           
           if (result) {
             HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
@@ -146,7 +146,8 @@ export class BrandController {
     } else {
 
         try {
-          const result = await this.brandService.getAllCategory(req.body.DomainID); // :TODO remove hardcode
+          
+          const result = await this.brandService.getAllCategory(req.params.DomainID); // :TODO remove hardcode
           if (result) {
             HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
           } else {
@@ -171,4 +172,16 @@ export class BrandController {
         }
       }
 
+      public async getAllSubscriptions(req: Request, res: Response, next: NextFunction) {
+        try {
+          const result = await this.brandService.getAllSubscriptions(); // :TODO remove hardcode
+          if (result) {
+            HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
+          } else {
+            HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
+          }
+        } catch (err) {
+          HttpResponseMessage.sendErrorResponse(res, err);
+        }
+      }
 }
