@@ -1,16 +1,13 @@
-import { Request, Response, NextFunction } from "express";
-import { BankValidation } from "../businessValidation/bankValidation";
-import { IBankValidation } from "../businessValidation/IBankvalidation";
-import { IKycValidation } from "../businessValidation/IKycValidation";
-import { KycValidation } from "../businessValidation/kycValidation";
+import { Request, Response, NextFunction } from "express"; 
 import { BankDetails } from "../models/bankDetails";
 import { BrandRegisterModel } from "../models/brandRegisterModel";
-import { KycDetails, KycDetailsUpdateModel } from "../models/kycDetails";
-import { BankService } from "../services/bankService";
+import { BrandUpdateModel } from "../models/brandUpdateModel";
 import { BrandService } from "../services/brandService";
-import { IBankService } from "../services/IBankService";
+import { IBrandBusinessValidation } from "../businessValidation/IBrandBusinessValidation";
+import { BrandBusinessValidation } from "../businessValidation/brandBusinessValidation";
 import { IBrandService } from "../services/IBrandService";
 import { HttpResponseMessage } from "../utils/httpResponseMessage";
+import { KycDetails, KycDetailsUpdateModel } from "../models/kycDetails";
 export class BrandController {
     private constructor() { }
 
@@ -19,22 +16,23 @@ export class BrandController {
     private bankValidator = null;
     private kycValidator = null;
 
+    private validator = null;
 
     /**
      * To get singleton instance
      *
-     * @param  {object} productService
+     * @param  {object} brandService
      */
 
     public static getInstance(
-        brandService: IBrandService = BrandService.getInstance(),
-        bankValidator: IBankValidation = BankValidation.getInstance(),
-        kycValidator: IKycValidation = KycValidation.getInstance()
+        brandService: IBrandService = BrandService.getInstance(), 
+        brandValidator: IBrandBusinessValidation = BrandBusinessValidation.getInstance()
     ) {
         if (!BrandController.instance) {
             BrandController.instance = new BrandController();
         }
         BrandController.instance.brandService = brandService;
+        BrandController.instance.validator = brandValidator;
         return BrandController.instance;
     }
 
@@ -49,6 +47,13 @@ export class BrandController {
  */
 
     public async postBrandRegister(req: Request, res: Response, next: NextFunction) {
+     // validate api input:
+    let { error, isError } = this.validator.validatePostBrandInput({ ...req.body, ...req.params });
+
+    if (isError) {
+      HttpResponseMessage.sendErrorResponse(res, "input validation error", error)
+    } else {
+
         let signupData: BrandRegisterModel = {
             DomainID: req.body.DomainID,
             CategoryId: req.body.CategoryId,
@@ -75,11 +80,17 @@ export class BrandController {
         }).catch(error => {
             HttpResponseMessage.sendErrorResponse(error, "Transaction Failed");
         })
+      }
     }
 
-    public async patchBrandUpdate(req: Request, res: Response, next: NextFunction) {
-        
-        let signupData: BrandRegisterModel = {
+    public async patchBrandUpdate(req: Request, res: Response, next: NextFunction) {        
+         // validate api input:
+    let { error, isError } = this.validator.validatePatchBrandInput(req.body.BrandID,{ ...req.body, ...req.params });
+
+    if (isError) {
+      HttpResponseMessage.sendErrorResponse(res, "input validation error", error)
+    } else {
+        let signupData: BrandUpdateModel = {
             DomainID: req.body.DomainID,
             CategoryId: req.body.CategoryId,
             Category: req.body.Category,
@@ -97,8 +108,7 @@ export class BrandController {
             Designation: req.body.Designation,
             UserEmailId: req.body.UserEmailId,
             RegBusinessName: req.body.RegBusinessName,
-            RegisteredType: req.body.RegisteredType,
-            AccountPassword: req.body.AccountPassword
+            RegisteredType: req.body.RegisteredType
         };
         const result = this.brandService.update(req.body.BrandID,signupData).then(result => {
             console.log(result);
@@ -107,11 +117,19 @@ export class BrandController {
         }).catch(error => {
             HttpResponseMessage.sendErrorResponse(error, "Transaction Failed");
         })
+      }
     }
 
     public async getAllProductCategory(req: Request, res: Response, next: NextFunction) {
+    // validate api input:
+    let { error, isError } = this.validator.validateGetAllProductCategoryInput({ ...req.body, ...req.params });
+
+    if (isError) {
+      HttpResponseMessage.sendErrorResponse(res, "input validation error", error)
+    } else {
+
         try {
-          const result = await this.brandService.getAllProductCategory(req.body.CategoryId); // :TODO remove hardcode
+          const result = await this.brandService.getAllProductCategory(req.params.CategoryId); // :TODO remove hardcode
           
           if (result) {
             HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
@@ -122,10 +140,19 @@ export class BrandController {
           HttpResponseMessage.sendErrorResponse(res, err);
         }
       }
+      }
 
       public async getAllCategory(req: Request, res: Response, next: NextFunction) {
+      // validate api input:
+      let { error, isError } = this.validator.validateGetAllCategoryInput({ ...req.body, ...req.params });
+
+    if (isError) {
+      HttpResponseMessage.sendErrorResponse(res, "input validation error", error)
+    } else {
+
         try {
-          const result = await this.brandService.getAllCategory(req.body.DomainID); // :TODO remove hardcode
+          
+          const result = await this.brandService.getAllCategory(req.params.DomainID); // :TODO remove hardcode
           if (result) {
             HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
           } else {
@@ -134,6 +161,7 @@ export class BrandController {
         } catch (err) {
           HttpResponseMessage.sendErrorResponse(res, err);
         }
+      }
       }
 
       public async getAllDomains(req: Request, res: Response, next: NextFunction) {
@@ -270,4 +298,16 @@ export class BrandController {
       }
   }
 
+      public async getAllSubscriptions(req: Request, res: Response, next: NextFunction) {
+        try {
+          const result = await this.brandService.getAllSubscriptions(); // :TODO remove hardcode
+          if (result) {
+            HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
+          } else {
+            HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
+          }
+        } catch (err) {
+          HttpResponseMessage.sendErrorResponse(res, err);
+        }
+      }
 }

@@ -214,19 +214,9 @@ export const brandRoutes = (
 
   /**
    * @swagger
-   * /brand/getallcategory:
-   *   post:
-   *     summary: Get all Categories.
-   *     requestBody:
-   *       required: true
-   *       content:
-   *         application/json:
-   *           schema:
-   *             type: object
-   *             properties:
-   *               DomainID:
-   *                 type: string
-   *                 description: The Id assigned to specific Domain.        
+   * /getallcategories/{DomainID}:
+   *   get:
+   *     summary: Get all Categories.      
    *     responses:
    *       200:
    *         description: All Categories successfully retrieved        
@@ -238,29 +228,18 @@ export const brandRoutes = (
    *                 
   */
 
-  app
-    .route("/api/v1/brand/getallcategory")
-    .post(
-      (req: Request, res: Response, next: NextFunction) =>
-        brandController.getAllCategory(req, res, next)
-    );
-
+   app
+   .route("/api/v1/brand/getallcategories/:DomainID")
+   .get(
+     (req: Request, res: Response, next: NextFunction) =>
+     brandController.getAllCategory(req, res, next)
+   );
 
   /**
    * @swagger
-   * /brand/getallproductcategory:
-   *   post:
-   *     summary: Get all Product Categories.
-   *     requestBody:
-   *       required: true
-   *       content:
-   *         application/json:
-   *           schema:
-   *             type: object
-   *             properties:
-   *               CategoryId:
-   *                 type: string
-   *                 description: The Id assigned to specific Category.        
+   * /getallproductcategories/{CategoryId}:
+   *   get:
+   *     summary: Get all Product Categories.       
    *     responses:
    *       200:
    *         description: All Product Categories successfully retrieved        
@@ -272,70 +251,12 @@ export const brandRoutes = (
    *                 
   */
 
-  app
-    .route("/api/v1/brand/getallproductcategory")
-    .post(
-      (req: Request, res: Response, next: NextFunction) =>
-        brandController.getAllProductCategory(req, res, next)
-    );
-
-  /**
-*  @swagger
-* 
-* 
-*  
-*  /brand/{brandId}/kyc:
-*      post:
-*          summary: Inserting new entry to kyc_details table
-*          description: Inserting Brand Kyc details
-*          parameters:
-*                - in: path
-*                  name: brandId
-*                  required: true
-*                  description: BrandId of the Brand
-*                  schema:
-*                      type: string
-*          requestBody:
-*              content:
-*                  application/json:
-*                      schema:
-*                          properties:
-*                              kycNumber:
-*                                  type: string
-*                                  description: Kyc number of the user
-*                              kycType:
-*                                  type: string
-*                                  description: Type of user Kyc
-*                              kycName:
-*                                  type: string
-*                                  description: Name of user's Kyc Document
-*                              kycUrl:
-*                                  type: string
-*                                  description: Kyc image url
-*                              kycStatus:
-*                                  type: string
-*                                  description: Current Kyc status (Active/Inactive)
-*                              isDefault:
-*                                  type: string
-*                                  description: Is it default Kyc or not
-*          responses:
-*              200:
-*                  description: Kyc Details inserted Sucessfully
-*              400:
-*                  description: BAD_REQUEST ( Validation error )
-*              500:
-*                  description: Kyc Details insertion Failed
-* 
-*/
-
-  app
-    .route('/api/v1/brand/:brandId/kyc')
-    .post(
-      async (req: Request, res: Response, next: NextFunction) => {
-        await brandController.postKycDetails(req, res, next);
-      }
-    )
-
+   app
+   .route("/api/v1/brand/getallproductcategories/:CategoryId")
+   .get(
+     (req: Request, res: Response, next: NextFunction) =>
+     brandController.getAllProductCategory(req, res, next)
+   );
 
 
 
