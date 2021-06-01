@@ -17,4 +17,4 @@ deploy:dev:
   script:
     - bash deploy/deploy.sh
   only:
-    - master
+    - dev
