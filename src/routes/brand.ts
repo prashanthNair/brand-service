@@ -303,6 +303,7 @@ export const brandRoutes = (
  *                          example:
  *                                  kycNumber: 123456789a
  *                                  kycType: PAN
+ *                                  kycName: Kyc Name sample
  *                                  kycUrl: kycurl
  *                                  kycStatus: Active
  *                                  isDefault: true

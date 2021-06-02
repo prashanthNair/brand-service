@@ -258,6 +258,11 @@ export class BrandBusinessValidation implements IBrandBusinessValidation {
 
   public validatePostKycDetailsInput = (data: KycDetails): object =>{
     let error = {}
+
+    data.isDefault = String(data.isDefault);
+
+    console.log(data);
+    
     
 
     // add necessary validation rules like type | length | required etc
@@ -301,6 +306,7 @@ public validateGetKycDetailsInput = (brandId: string): object =>{
 
 public validateUpdateKycDetailsInput = (data: KycDetailsUpdateModel): object =>{
     let error = {}
+    data.isDefault = String(data.isDefault);
 
     // add necessary validation rules like type | length | required etc
 
