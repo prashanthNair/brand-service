@@ -258,8 +258,6 @@ export class BrandBusinessValidation implements IBrandBusinessValidation {
 
   public validatePostKycDetailsInput = (data: KycDetails): object =>{
     let error = {}
-
-    console.log(data,"/////////////////////////////");
     
 
     // add necessary validation rules like type | length | required etc

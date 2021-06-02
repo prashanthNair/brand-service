@@ -417,6 +417,13 @@ export const brandRoutes = (
    *      post:
    *          summary: Inserting new entry to bank_details table
    *          description: Adding user bank details
+   *          parameters:
+   *                - in: path
+   *                  name: brandId
+   *                  required: true
+   *                  description: BrandId of the Brand
+   *                  schema:
+   *                      type: string
    *          requestBody:
    *              content:
    *                  application/json:
@@ -425,9 +432,6 @@ export const brandRoutes = (
    *                              bankNumber:
    *                                  type: string
    *                                  description: Bank account number of the user
-   *                              brandId:
-   *                                  type: string
-   *                                  description: Brand Id of user
    *                              bankType:
    *                                  type: string
    *                                  description: Type of user Bank account

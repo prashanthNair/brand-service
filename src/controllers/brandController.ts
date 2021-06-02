@@ -293,11 +293,12 @@ export class BrandController {
       };
 
       const result = await this.brandService.postBankDetails(bankDetailsInputModel);
+      
 
-      if (result) {
+      if (!result.errno) {
         HttpResponseMessage.successResponse(res, "Bank Account Details inserted Sucessfully");
       } else {
-        HttpResponseMessage.sendErrorResponse(res, "Transaction Failed");
+        HttpResponseMessage.sendErrorResponse(res, "Transaction Failed", result);
       }
     }
   }
