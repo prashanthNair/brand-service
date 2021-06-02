@@ -276,6 +276,7 @@ export const brandRoutes = (
  *                  description: BrandId of the Brand
  *                  schema:
  *                      type: string
+ *                      example: B100000016
  *          requestBody:
  *              content:
  *                  application/json:
@@ -299,6 +300,14 @@ export const brandRoutes = (
  *                              isDefault:
  *                                  type: string
  *                                  description: Is it default Kyc or not
+ *                          example:
+ *                                  kycNumber: 123456789a
+ *                                  kycType: PAN
+ *                                  kycUrl: kycurl
+ *                                  kycStatus: Active
+ *                                  isDefault: true
+ *                              
+ *                                 
  *          responses:
  *              200:
  *                  description: Kyc Details inserted Sucessfully
@@ -335,6 +344,8 @@ export const brandRoutes = (
   *                  description: BrandId of the Brand
   *                  schema:
   *                      type: string
+  *                      example: B100000010
+  *               
   *          
   *          responses:
   *              200:
@@ -368,6 +379,7 @@ export const brandRoutes = (
   *                  description: BrandId of the Brand
   *                  schema:
   *                      type: string
+  *                      example: B100000016
   *          requestBody:
   *              content:
   *                  application/json:
@@ -391,6 +403,12 @@ export const brandRoutes = (
   *                              isDefault:
   *                                  type: string
   *                                  description: Is it default Kyc or not
+  *                          example:
+  *                                  kycNumber: 123456789a
+  *                                  kycType: PAN-New
+  *                                  kycUrl: kycurl-updated
+  *                                  kycStatus: inctive
+  *                                  isDefault: true
   *          responses:
   *              200:
   *                  description: Kyc Details updated Sucessfully
@@ -424,6 +442,7 @@ export const brandRoutes = (
    *                  description: BrandId of the Brand
    *                  schema:
    *                      type: string
+   *                      example: B100000011
    *          requestBody:
    *              content:
    *                  application/json:
@@ -450,6 +469,14 @@ export const brandRoutes = (
    *                              isDefault:
    *                                  type: string
    *                                  description: Is it default bank or not
+   *                          example:
+   *                              bankNumber: 123123123
+   *                              bankType: savings
+   *                              ifscCode: FDCH000234
+   *                              bankName: New Bank
+   *                              bankUrl: bankurl
+   *                              bankStatus: Active
+   *                              isDefault: true
    *          responses:
    *              200:
    *                  description: Bank Account Details inserted Sucessfully
@@ -483,6 +510,7 @@ export const brandRoutes = (
  *                  description: BrandId of the Brand
  *                  schema:
  *                      type: string
+ *                      example: B100000007
  *          responses:
  *              200:
  *                  description: Fetched Bank Account Details Sucessfully.
@@ -516,6 +544,7 @@ export const brandRoutes = (
 *                  description: BrandId of the Brand
 *                  schema:
 *                      type: string
+*                      example: B100000011
 *          requestBody:
 *              content:
 *                  application/json:
@@ -539,6 +568,13 @@ export const brandRoutes = (
 *                              isDefault:
 *                                  type: string
 *                                  description: Is it default bank or not
+*                          example:
+*                              bankNumber: 123123123
+*                              bankType: savings
+*                              bankName: New Bank Updated
+*                              bankUrl: bankurl
+*                              bankStatus: Active
+*                              isDefault: true
 *          responses:
 *              200:
 *                  description: Bank Account Details updated Sucessfully
