@@ -5,22 +5,16 @@ import { swaggerDocument } from "./api-doc";
 import { notFoundErrorHandler, errorHandler } from "./middlewares/apiErrorHandler";
 var swaggerUi = require('swagger-ui-express');
 import * as swaggerJSDoc from 'swagger-jsdoc';
-var cors = require('cors')
+// import cors from 'cors'
+ var cors = require('cors')
 class App {
 
     public app = express();
 
-    // private options: cors.CorsOptions = {
-    //     allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token"],
-    //     credentials: false,
-    //     methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
-
-    //     origin: '*',
-    //     preflightContinue: false
-    // };
-
+    
     constructor() {
         this.config();
+        this.app.use(cors());
         registerRoutes(this.app);
         this.app.use(notFoundErrorHandler)
         this.app.use(errorHandler);
@@ -41,8 +35,7 @@ class App {
             response.header("Access-Control-Allow-Origin", "*");
             response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
             next();
-        });
-        this.app.use(cors());
+        }); 
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: false }));
         const swaggerSpec = swaggerJSDoc(this.JSDocOptions);
