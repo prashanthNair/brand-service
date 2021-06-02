@@ -200,6 +200,7 @@ export class BrandBusinessValidation implements IBrandBusinessValidation {
 
       if(isEmpty(data.bankStatus)) error["bankStatus"] = "Bank Status field cannot be left blank";
       if(typeof(data.bankStatus) !== "string" ) error["bankStatus"] = "Bank Status must be of type string";
+      if(!validator.isIn(data.bankStatus,["Active","active","Inactive","inactive"])) error["bankStatus"] = 'Bank Status should be in "Active" or "active" or "Inactive" or"inactive"';
 
       
       if(isEmpty(data.isDefault)) error["isDefault"] = "Is Default field cannot be left blank";
@@ -247,6 +248,7 @@ export class BrandBusinessValidation implements IBrandBusinessValidation {
 
       if(isEmpty(data.bankStatus)) error["bankStatus"] = "Bank Status field cannot be left blank";
       if(typeof(data.bankStatus) !== "string" ) error["bankStatus"] = "Bank Status must be of type string";
+      if(!validator.isIn(data.bankStatus,["Active","active","Inactive","inactive"])) error["bankStatus"] = 'bank Status should be in "Active" or "active" or "Inactive" or"inactive"';
 
       
       if(isEmpty(data.isDefault)) error["isDefault"] = "Is Default field cannot be left blank";
@@ -284,6 +286,7 @@ export class BrandBusinessValidation implements IBrandBusinessValidation {
 
     if(isEmpty(data.kycStatus)) error["kycStatus"] = "Kyc Status field cannot be left blank";
     if(typeof(data.kycStatus) !== "string" ) error["kycStatus"] = "Kyc Status must be of type string";
+    if(!validator.isIn(data.kycStatus,["Active","active","Inactive","inactive"])) error["kycStatus"] = 'Kyc Status should be in "Active" or "active" or "Inactive" or"inactive"';
 
 
     if(isEmpty(data.isDefault)) error["isDefault"] = "IsDefault field cannot be left blank";
@@ -324,6 +327,7 @@ public validateUpdateKycDetailsInput = (data: KycDetailsUpdateModel): object =>{
 
     if(isEmpty(data.kycStatus)) error["kycStatus"] = "Kyc Status field cannot be left blank";
     if(typeof(data.kycStatus) !== "string" ) error["kycStatus"] = "Kyc Status must be of type string";
+    if(!validator.isIn(data.kycStatus,["Active","active","Inactive","inactive"])) error["kycStatus"] = 'Kyc Status should be in "Active" or "active" or "Inactive" or"inactive"';
 
 
     if(isEmpty(data.isDefault)) error["isDefault"] = "IsDefault field cannot be left blank";

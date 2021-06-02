@@ -301,12 +301,12 @@ export const brandRoutes = (
  *                                  type: string
  *                                  description: Is it default Kyc or not
  *                          example:
- *                                  kycNumber: 123456789a
- *                                  kycType: PAN
- *                                  kycName: Kyc Name sample
- *                                  kycUrl: kycurl
- *                                  kycStatus: Active
- *                                  isDefault: true
+ *                                  kycNumber: "123456789a"
+ *                                  kycType: "PAN"
+ *                                  kycName: "Kyc Name sample"
+ *                                  kycUrl: "kycurl"
+ *                                  kycStatus: "Active"
+ *                                  isDefault: "true"
  *                              
  *                                 
  *          responses:
@@ -345,7 +345,7 @@ export const brandRoutes = (
   *                  description: BrandId of the Brand
   *                  schema:
   *                      type: string
-  *                      example: B100000010
+  *                      example: "B100000010"
   *               
   *          
   *          responses:
@@ -380,7 +380,7 @@ export const brandRoutes = (
   *                  description: BrandId of the Brand
   *                  schema:
   *                      type: string
-  *                      example: B100000016
+  *                      example: "B100000016"
   *          requestBody:
   *              content:
   *                  application/json:
@@ -405,11 +405,11 @@ export const brandRoutes = (
   *                                  type: string
   *                                  description: Is it default Kyc or not
   *                          example:
-  *                                  kycNumber: 123456789a
-  *                                  kycType: PAN-New
-  *                                  kycUrl: kycurl-updated
-  *                                  kycStatus: inctive
-  *                                  isDefault: true
+  *                                  kycNumber: "123456789a"
+  *                                  kycType: "PAN-New"
+  *                                  kycUrl: "kycurl-updated"
+  *                                  kycStatus: "inactive"
+  *                                  isDefault: "true"
   *          responses:
   *              200:
   *                  description: Kyc Details updated Sucessfully
@@ -471,13 +471,13 @@ export const brandRoutes = (
    *                                  type: string
    *                                  description: Is it default bank or not
    *                          example:
-   *                              bankNumber: 123123123
-   *                              bankType: savings
-   *                              ifscCode: FDCH000234
-   *                              bankName: New Bank
-   *                              bankUrl: bankurl
-   *                              bankStatus: Active
-   *                              isDefault: true
+   *                              bankNumber: "123123123"
+   *                              bankType: "savings"
+   *                              ifscCode: "FDCH000234"
+   *                              bankName: "New Bank"
+   *                              bankUrl: "bankurl"
+   *                              bankStatus: "Active"
+   *                              isDefault: "true"
    *          responses:
    *              200:
    *                  description: Bank Account Details inserted Sucessfully
@@ -570,12 +570,12 @@ export const brandRoutes = (
 *                                  type: string
 *                                  description: Is it default bank or not
 *                          example:
-*                              bankNumber: 123123123
-*                              bankType: savings
-*                              bankName: New Bank Updated
-*                              bankUrl: bankurl
-*                              bankStatus: Active
-*                              isDefault: true
+*                              bankNumber: "123123123"
+*                              bankType: "savings"
+*                              bankName: "New Bank Updated"
+*                              bankUrl: "bankurl"
+*                              bankStatus: "Active"
+*                              isDefault: "true"
 *          responses:
 *              200:
 *                  description: Bank Account Details updated Sucessfully
