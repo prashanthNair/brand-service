@@ -265,7 +265,7 @@ export const brandRoutes = (
  * 
  * 
  *  
- *  /api/v1/brand/{brandId}/kyc:
+ *  /brand/{brandId}/kyc:
  *      post:
  *          summary: Inserting new entry to kyc_details table
  *          description: Inserting Brand Kyc details
