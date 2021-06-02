@@ -1,6 +1,8 @@
 import validator from 'validator';
 import { BrandRegisterModel } from "../models/brandRegisterModel";
 import { BrandUpdateModel } from "../models/brandUpdateModel";
+import { BankDetails, UpdateBankDetails } from "../models/bankDetails";
+import { KycDetails, KycDetailsUpdateModel } from "../models/kycDetails";
 import { IBrandBusinessValidation } from "./IBrandBusinessValidation";
 import { isEmpty } from './isEmpty';
 
@@ -171,4 +173,159 @@ export class BrandBusinessValidation implements IBrandBusinessValidation {
       let isError = !isEmpty(error);
       return {error, isError};
     }
+
+    public validatePostBankDetailsInput = (data: BankDetails) : object =>{
+      
+      let error = {};
+
+      // add necessary validation rules like type | length | required etc
+
+      if(isEmpty(data.bankNumber)) error["bankNumber"] = "Bank Account Number field cannot be left blank";
+      if(typeof(data.bankNumber) !== "string" ) error["bankNumber"] = "Bank Account Number must be of type string";
+
+      if(isEmpty(data.brandId)) error["BrandId"] = "Brand ID field cannot be left blank";
+      if(typeof(data.brandId) !== "string" ) error["BrandId"] = "Brand ID must be of type string";
+
+      
+      if(isEmpty(data.bankType)) error["bankType"] = "Bank Type field cannot be left blank";
+      if(typeof(data.bankType) !== "string" ) error["bankType"] = "Bank Type must be of type string";
+
+
+      if(isEmpty(data.bankName)) error["bankName"] = "Bank Name field cannot be left blank";
+      if(typeof(data.bankName) !== "string" ) error["bankName"] = "Bank Name must be of type string";
+
+      if(isEmpty(data.bankUrl)) error["bankUrl"] = "Bank Name field cannot be left blank";
+      if(typeof(data.bankUrl) !== "string" ) error["bankUrl"] = "Bank Name must be of type string";
+
+
+      if(isEmpty(data.bankStatus)) error["bankStatus"] = "Bank Status field cannot be left blank";
+      if(typeof(data.bankStatus) !== "string" ) error["bankStatus"] = "Bank Status must be of type string";
+
+      
+      if(isEmpty(data.isDefault)) error["isDefault"] = "Is Default field cannot be left blank";
+      if(typeof(data.isDefault) !== "string" ) error["isDefault"] = "Is Default must be of type string";
+
+      if(isEmpty(data.ifscCode)) error["ifscCode"] = "IFSC field cannot be left blank";
+      if(typeof(data.ifscCode) !== "string" ) error["ifscCode"] = "IFSC must be of type string";
+      
+
+      let isError = !isEmpty(error);
+      return {error, isError};
+  }
+
+  public validateGetBankDetailsInput = (brandId: string): object =>{
+      let error = {};
+
+      if(isEmpty(brandId)) error["brandId"] = "Brand ID field cannot be left blank";
+      if(typeof(brandId) !== "string" ) error["brandId"] = "Brand ID must be of type string";
+
+
+      let isError = !isEmpty(error);
+      return {error, isError};
+
+  }
+
+  public validateUpdateBankDetailsInput = (data: UpdateBankDetails) : object =>{
+      let error = {};
+
+      // add necessary validation rules like type | length | required etc
+
+      if(isEmpty(data.bankNumber)) error["bankNumber"] = "Bank Account Number field cannot be left blank";
+      if(typeof(data.bankNumber) !== "string" ) error["bankNumber"] = "Bank Account Number must be of type string";
+
+      
+      if(isEmpty(data.bankType)) error["bankType"] = "Bank Type field cannot be left blank";
+      if(typeof(data.bankType) !== "string" ) error["bankType"] = "Bank Type must be of type string";
+
+
+      if(isEmpty(data.bankName)) error["bankName"] = "Bank Name field cannot be left blank";
+      if(typeof(data.bankName) !== "string" ) error["bankName"] = "Bank Name must be of type string";
+
+      if(isEmpty(data.bankUrl)) error["bankUrl"] = "Bank Name field cannot be left blank";
+      if(typeof(data.bankUrl) !== "string" ) error["bankUrl"] = "Bank Name must be of type string";
+
+
+      if(isEmpty(data.bankStatus)) error["bankStatus"] = "Bank Status field cannot be left blank";
+      if(typeof(data.bankStatus) !== "string" ) error["bankStatus"] = "Bank Status must be of type string";
+
+      
+      if(isEmpty(data.isDefault)) error["isDefault"] = "Is Default field cannot be left blank";
+      if(typeof(data.isDefault) !== "string" ) error["isDefault"] = "Is Default must be of type string";
+
+      let isError = !isEmpty(error);
+      return {error, isError};
+  }
+
+  public validatePostKycDetailsInput = (data: KycDetails): object =>{
+    let error = {}
+
+    console.log(data,"/////////////////////////////");
+    
+
+    // add necessary validation rules like type | length | required etc
+
+    if(isEmpty(data.kycNumber)) error["kycNumber"] = "KYC Number field cannot be left blank";
+    if(typeof(data.kycNumber) !== "string" ) error["kycNumber"] = "KYC Number must be of type string";
+
+    if(isEmpty(data.brandId)) error["brandId"] = "Brand ID field cannot be left blank";
+    if(typeof(data.brandId) !== "string" ) error["brandId"] = "Brand ID must be of type string";
+
+    if(isEmpty(data.kycType)) error["kycType"] = "Kyc Type field cannot be left blank";
+    if(typeof(data.kycType) !== "string" ) error["kycType"] = "Kyc Type must be of type string";
+
+    if(isEmpty(data.kycName)) error["kycName"] = "Kyc Name field cannot be left blank";
+    if(typeof(data.kycName) !== "string" ) error["kycName"] = "Kyc Name must be of type string";
+
+    if(isEmpty(data.kycUrl)) error["kycUrl"] = "Kyc Url field cannot be left blank";
+    if(typeof(data.kycUrl) !== "string" ) error["kycUrl"] = "Kyc Url must be of type string";
+
+    if(isEmpty(data.kycStatus)) error["kycStatus"] = "Kyc Status field cannot be left blank";
+    if(typeof(data.kycStatus) !== "string" ) error["kycStatus"] = "Kyc Status must be of type string";
+
+
+    if(isEmpty(data.isDefault)) error["isDefault"] = "IsDefault field cannot be left blank";
+    if(typeof(data.isDefault) !== "string" ) error["isDefault"] = "IsDefault must be of type string";
+
+    let isError = !isEmpty(error);
+    return {error, isError};
+}
+
+public validateGetKycDetailsInput = (brandId: string): object =>{
+
+    let error = {};
+
+    if(isEmpty(brandId)) error["brandId"] = "Brand ID field cannot be left blank";
+    if(typeof(brandId) !== "string" ) error["brandId"] = "Brand ID must be of type string";
+
+    let isError = !isEmpty(error);
+    return {error, isError};
+}
+
+public validateUpdateKycDetailsInput = (data: KycDetailsUpdateModel): object =>{
+    let error = {}
+
+    // add necessary validation rules like type | length | required etc
+
+    if(isEmpty(data.kycNumber)) error["kycNumber"] = "KYC Number field cannot be left blank";
+    if(typeof(data.kycNumber) !== "string" ) error["kycNumber"] = "KYC Number must be of type string";
+
+    if(isEmpty(data.kycType)) error["kycType"] = "Kyc Type field cannot be left blank";
+    if(typeof(data.kycType) !== "string" ) error["kycType"] = "Kyc Type must be of type string";
+
+    if(isEmpty(data.kycName)) error["kycName"] = "Kyc Name field cannot be left blank";
+    if(typeof(data.kycName) !== "string" ) error["kycName"] = "Kyc Name must be of type string";
+
+    if(isEmpty(data.kycUrl)) error["kycUrl"] = "Kyc Url field cannot be left blank";
+    if(typeof(data.kycUrl) !== "string" ) error["kycUrl"] = "Kyc Url must be of type string";
+
+    if(isEmpty(data.kycStatus)) error["kycStatus"] = "Kyc Status field cannot be left blank";
+    if(typeof(data.kycStatus) !== "string" ) error["kycStatus"] = "Kyc Status must be of type string";
+
+
+    if(isEmpty(data.isDefault)) error["isDefault"] = "IsDefault field cannot be left blank";
+    if(typeof(data.isDefault) !== "string" ) error["isDefault"] = "IsDefault must be of type string";
+
+    let isError = !isEmpty(error);
+    return {error, isError};
+}
 }

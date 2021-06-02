@@ -261,6 +261,65 @@ export const brandRoutes = (
 
 
   /**
+ *  @swagger
+ * 
+ * 
+ *  
+ *  /api/v1/brand/{brandId}/kyc:
+ *      post:
+ *          summary: Inserting new entry to kyc_details table
+ *          description: Inserting Brand Kyc details
+ *          parameters:
+ *                - in: path
+ *                  name: brandId
+ *                  required: true
+ *                  description: BrandId of the Brand
+ *                  schema:
+ *                      type: string
+ *          requestBody:
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          properties:
+ *                              kycNumber:
+ *                                  type: string
+ *                                  description: Kyc number of the user
+ *                              kycType:
+ *                                  type: string
+ *                                  description: Type of user Kyc
+ *                              kycName:
+ *                                  type: string
+ *                                  description: Name of user's Kyc Document
+ *                              kycUrl:
+ *                                  type: string
+ *                                  description: Kyc image url
+ *                              kycStatus:
+ *                                  type: string
+ *                                  description: Current Kyc status (Active/Inactive)
+ *                              isDefault:
+ *                                  type: string
+ *                                  description: Is it default Kyc or not
+ *          responses:
+ *              200:
+ *                  description: Kyc Details inserted Sucessfully
+ *              400:
+ *                  description: BAD_REQUEST ( Validation error )
+ *              500:
+ *                  description: Kyc Details insertion Failed
+ * 
+ */
+
+   app
+   .route('/api/v1/brand/:brandId/kyc')
+   .post(
+       async (req: Request, res: Response, next: NextFunction)=>{        
+           await brandController.postKycDetails(req,res,next);
+       }
+   )
+
+
+
+  /**
   *  @swagger
   * 
   * 
@@ -349,6 +408,8 @@ export const brandRoutes = (
         await brandController.updateKycDetails(req, res, next);
       }
     )
+
+
   /**
    *  @swagger
    *  
@@ -361,28 +422,28 @@ export const brandRoutes = (
    *                  application/json:
    *                      schema:
    *                          properties:
-   *                              BankNumber:
+   *                              bankNumber:
    *                                  type: string
    *                                  description: Bank account number of the user
-   *                              BrandId:
+   *                              brandId:
    *                                  type: string
    *                                  description: Brand Id of user
-   *                              BankType:
+   *                              bankType:
    *                                  type: string
    *                                  description: Type of user Bank account
-   *                              BankName:
+   *                              bankName:
    *                                  type: string
    *                                  description: Name of user's Bank
-   *                              IfscCode:
+   *                              ifscCode:
    *                                  type: string
    *                                  description: IFSC code of user's Bank
-   *                              BankUrl:
+   *                              bankUrl:
    *                                  type: string
    *                                  description: Bank image url
-   *                              BankStatus:
+   *                              bankStatus:
    *                                  type: string
    *                                  description: Current bank account status (Active/Inactive)
-   *                              IsDefault:
+   *                              isDefault:
    *                                  type: string
    *                                  description: Is it default bank or not
    *          responses:
@@ -394,6 +455,8 @@ export const brandRoutes = (
    *                  description: Bank Account Details insertion Failed
    * 
    */
+
+
   app
     .route('/api/v1/brand/:brandId/bank')
     .post(
@@ -401,4 +464,92 @@ export const brandRoutes = (
         await brandController.postBankDetails(req, res, next);
       }
     )
+
+  /**
+ *  @swagger
+ *  
+ *  /brand/{brandId}/bank:
+ *      get:
+ *          summary: get bank details
+ *          description: Get bank Details of a specific brand
+ *          parameters:
+ *                - in: path
+ *                  name: brandId
+ *                  required: true
+ *                  description: BrandId of the Brand
+ *                  schema:
+ *                      type: string
+ *          responses:
+ *              200:
+ *                  description: Fetched Bank Account Details Sucessfully.
+ *              400:
+ *                  description: BAD_REQUEST ( Validation error )
+ *              500:
+ *                  description: Fetching Bank Account Details is Failed.
+ * 
+ */
+
+   app
+   .route('/api/v1/brand/:brandId/bank')
+   .get(
+       async (req: Request, res: Response, next: NextFunction)=>{
+           await brandController.getBankDetails(req,res,next);
+       }
+   )
+
+
+/**
+*  @swagger
+*  
+*  /brand/{brandId}/bank:
+*      put:
+*          summary: Inserting new entry to bank_details table
+*          description: Adding user bank details
+*          parameters:
+*                - in: path
+*                  name: brandId
+*                  required: true
+*                  description: BrandId of the Brand
+*                  schema:
+*                      type: string
+*          requestBody:
+*              content:
+*                  application/json:
+*                      schema:
+*                          properties:
+*                              bankNumber:
+*                                  type: string
+*                                  description: Bank account number of the user
+*                              bankType:
+*                                  type: string
+*                                  description: Type of user Bank account
+*                              bankName:
+*                                  type: string
+*                                  description: Name of user's Bank
+*                              bankUrl:
+*                                  type: string
+*                                  description: Bank image url
+*                              bankStatus:
+*                                  type: string
+*                                  description: Current bank account status (Active/Inactive)
+*                              isDefault:
+*                                  type: string
+*                                  description: Is it default bank or not
+*          responses:
+*              200:
+*                  description: Bank Account Details updated Sucessfully
+*              400:
+*                  description: BAD_REQUEST ( Validation error )
+*              500:
+*                  description: Bank Account Details updation Failed
+* 
+*/
+
+app
+   .route('/api/v1/brand/:brandId/bank')
+   .put(
+       async (req: Request, res: Response, next: NextFunction)=>{
+           await brandController.updateBankDetails(req,res,next);
+       }
+   )
 }
