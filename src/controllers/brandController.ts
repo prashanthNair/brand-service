@@ -260,8 +260,6 @@ export class BrandController {
       }
 
       const result = await this.brandService.updateKycDetails(KycDetailsInputModel);
-
-      console.log(result);
       
 
       if (result) {

@@ -181,33 +181,34 @@ export class BrandBusinessValidation implements IBrandBusinessValidation {
       // add necessary validation rules like type | length | required etc
 
       if(isEmpty(data.bankNumber)) error["bankNumber"] = "Bank Account Number field cannot be left blank";
-      if(typeof(data.bankNumber) !== "string" ) error["bankNumber"] = "Bank Account Number must be of type string";
+      else if(typeof(data.bankNumber) !== "string" ) error["bankNumber"] = "Bank Account Number must be of type string";
 
       if(isEmpty(data.brandId)) error["BrandId"] = "Brand ID field cannot be left blank";
-      if(typeof(data.brandId) !== "string" ) error["BrandId"] = "Brand ID must be of type string";
+      else if(typeof(data.brandId) !== "string" ) error["BrandId"] = "Brand ID must be of type string";
 
       
       if(isEmpty(data.bankType)) error["bankType"] = "Bank Type field cannot be left blank";
-      if(typeof(data.bankType) !== "string" ) error["bankType"] = "Bank Type must be of type string";
+      else if(typeof(data.bankType) !== "string" ) error["bankType"] = "Bank Type must be of type string";
 
 
       if(isEmpty(data.bankName)) error["bankName"] = "Bank Name field cannot be left blank";
-      if(typeof(data.bankName) !== "string" ) error["bankName"] = "Bank Name must be of type string";
+      else if(typeof(data.bankName) !== "string" ) error["bankName"] = "Bank Name must be of type string";
+      
 
-      if(isEmpty(data.bankUrl)) error["bankUrl"] = "Bank Name field cannot be left blank";
-      if(typeof(data.bankUrl) !== "string" ) error["bankUrl"] = "Bank Name must be of type string";
-
+      if(isEmpty(data.bankUrl)) error["bankUrl"] = "Bank url field cannot be left blank";
+      else if(typeof(data.bankUrl) !== "string" ) error["bankUrl"] = "Bank url field must be of type string";
+      else if (!validator.isURL(data.bankUrl)) error["bankUrl"] = "Bank Url Field Must be URL"
 
       if(isEmpty(data.bankStatus)) error["bankStatus"] = "Bank Status field cannot be left blank";
-      if(typeof(data.bankStatus) !== "string" ) error["bankStatus"] = "Bank Status must be of type string";
-      if(!validator.isIn(data.bankStatus,["Active","active","Inactive","inactive"])) error["bankStatus"] = 'Bank Status should be in "Active" or "active" or "Inactive" or"inactive"';
+      else if(typeof(data.bankStatus) !== "string" ) error["bankStatus"] = "Bank Status must be of type string";
+      else if(!validator.isIn(data.bankStatus,["Active","active","Inactive","inactive"])) error["bankStatus"] = 'Bank Status should be in "Active" or "active" or "Inactive" or"inactive"';
 
       
       if(isEmpty(data.isDefault)) error["isDefault"] = "Is Default field cannot be left blank";
-      if(typeof(data.isDefault) !== "string" ) error["isDefault"] = "Is Default must be of type string";
+      else if(typeof(data.isDefault) !== "string" ) error["isDefault"] = "Is Default must be of type string";
 
       if(isEmpty(data.ifscCode)) error["ifscCode"] = "IFSC field cannot be left blank";
-      if(typeof(data.ifscCode) !== "string" ) error["ifscCode"] = "IFSC must be of type string";
+      else if(typeof(data.ifscCode) !== "string" ) error["ifscCode"] = "IFSC must be of type string";
       
 
       let isError = !isEmpty(error);
@@ -218,7 +219,7 @@ export class BrandBusinessValidation implements IBrandBusinessValidation {
       let error = {};
 
       if(isEmpty(brandId)) error["brandId"] = "Brand ID field cannot be left blank";
-      if(typeof(brandId) !== "string" ) error["brandId"] = "Brand ID must be of type string";
+      else if(typeof(brandId) !== "string" ) error["brandId"] = "Brand ID must be of type string";
 
 
       let isError = !isEmpty(error);
@@ -232,27 +233,28 @@ export class BrandBusinessValidation implements IBrandBusinessValidation {
       // add necessary validation rules like type | length | required etc
 
       if(isEmpty(data.bankNumber)) error["bankNumber"] = "Bank Account Number field cannot be left blank";
-      if(typeof(data.bankNumber) !== "string" ) error["bankNumber"] = "Bank Account Number must be of type string";
+      else if(typeof(data.bankNumber) !== "string" ) error["bankNumber"] = "Bank Account Number must be of type string";
 
       
       if(isEmpty(data.bankType)) error["bankType"] = "Bank Type field cannot be left blank";
-      if(typeof(data.bankType) !== "string" ) error["bankType"] = "Bank Type must be of type string";
+      else if(typeof(data.bankType) !== "string" ) error["bankType"] = "Bank Type must be of type string";
 
 
       if(isEmpty(data.bankName)) error["bankName"] = "Bank Name field cannot be left blank";
-      if(typeof(data.bankName) !== "string" ) error["bankName"] = "Bank Name must be of type string";
+      else if(typeof(data.bankName) !== "string" ) error["bankName"] = "Bank Name must be of type string";
 
-      if(isEmpty(data.bankUrl)) error["bankUrl"] = "Bank Name field cannot be left blank";
-      if(typeof(data.bankUrl) !== "string" ) error["bankUrl"] = "Bank Name must be of type string";
+      if(isEmpty(data.bankUrl)) error["bankUrl"] = "Bank Url field cannot be left blank";
+      else if(typeof(data.bankUrl) !== "string" ) error["bankUrl"] = "Bank Url must be of type string";
+      else if(!validator.isURL(data.bankUrl)) error["bankUrl"] = "This field should be URL";
 
 
       if(isEmpty(data.bankStatus)) error["bankStatus"] = "Bank Status field cannot be left blank";
-      if(typeof(data.bankStatus) !== "string" ) error["bankStatus"] = "Bank Status must be of type string";
-      if(!validator.isIn(data.bankStatus,["Active","active","Inactive","inactive"])) error["bankStatus"] = 'bank Status should be in "Active" or "active" or "Inactive" or"inactive"';
+      else if(typeof(data.bankStatus) !== "string" ) error["bankStatus"] = "Bank Status must be of type string";
+      else if(!validator.isIn(data.bankStatus,["Active","active","Inactive","inactive"])) error["bankStatus"] = 'bank Status should be in "Active" or "active" or "Inactive" or"inactive"';
 
       
       if(isEmpty(data.isDefault)) error["isDefault"] = "Is Default field cannot be left blank";
-      if(typeof(data.isDefault) !== "string" ) error["isDefault"] = "Is Default must be of type string";
+      else if(typeof(data.isDefault) !== "string" ) error["isDefault"] = "Is Default must be of type string";
 
       let isError = !isEmpty(error);
       return {error, isError};
@@ -262,35 +264,33 @@ export class BrandBusinessValidation implements IBrandBusinessValidation {
     let error = {}
 
     data.isDefault = String(data.isDefault);
-
-    console.log(data);
-    
     
 
     // add necessary validation rules like type | length | required etc
 
     if(isEmpty(data.kycNumber)) error["kycNumber"] = "KYC Number field cannot be left blank";
-    if(typeof(data.kycNumber) !== "string" ) error["kycNumber"] = "KYC Number must be of type string";
+    else if(typeof(data.kycNumber) !== "string" ) error["kycNumber"] = "KYC Number must be of type string";
 
     if(isEmpty(data.brandId)) error["brandId"] = "Brand ID field cannot be left blank";
-    if(typeof(data.brandId) !== "string" ) error["brandId"] = "Brand ID must be of type string";
+    else if(typeof(data.brandId) !== "string" ) error["brandId"] = "Brand ID must be of type string";
 
     if(isEmpty(data.kycType)) error["kycType"] = "Kyc Type field cannot be left blank";
-    if(typeof(data.kycType) !== "string" ) error["kycType"] = "Kyc Type must be of type string";
+    else if(typeof(data.kycType) !== "string" ) error["kycType"] = "Kyc Type must be of type string";
 
     if(isEmpty(data.kycName)) error["kycName"] = "Kyc Name field cannot be left blank";
-    if(typeof(data.kycName) !== "string" ) error["kycName"] = "Kyc Name must be of type string";
+    else if(typeof(data.kycName) !== "string" ) error["kycName"] = "Kyc Name must be of type string";
 
     if(isEmpty(data.kycUrl)) error["kycUrl"] = "Kyc Url field cannot be left blank";
-    if(typeof(data.kycUrl) !== "string" ) error["kycUrl"] = "Kyc Url must be of type string";
+    else if(typeof(data.kycUrl) !== "string" ) error["kycUrl"] = "Kyc Url must be of type string";
+    else if(!validator.isURL(data.kycUrl)) error["kycUrl"] = "Kyc Url field must be URL";
 
     if(isEmpty(data.kycStatus)) error["kycStatus"] = "Kyc Status field cannot be left blank";
-    if(typeof(data.kycStatus) !== "string" ) error["kycStatus"] = "Kyc Status must be of type string";
-    if(!validator.isIn(data.kycStatus,["Active","active","Inactive","inactive"])) error["kycStatus"] = 'Kyc Status should be in "Active" or "active" or "Inactive" or"inactive"';
+    else if(typeof(data.kycStatus) !== "string" ) error["kycStatus"] = "Kyc Status must be of type string";
+    else if(!validator.isIn(data.kycStatus,["Active","active","Inactive","inactive"])) error["kycStatus"] = 'Kyc Status should be in "Active" or "active" or "Inactive" or"inactive"';
 
 
     if(isEmpty(data.isDefault)) error["isDefault"] = "IsDefault field cannot be left blank";
-    if(typeof(data.isDefault) !== "string" ) error["isDefault"] = "IsDefault must be of type string";
+    else if(typeof(data.isDefault) !== "string" ) error["isDefault"] = "IsDefault must be of type string";
 
     let isError = !isEmpty(error);
     return {error, isError};
@@ -301,7 +301,7 @@ public validateGetKycDetailsInput = (brandId: string): object =>{
     let error = {};
 
     if(isEmpty(brandId)) error["brandId"] = "Brand ID field cannot be left blank";
-    if(typeof(brandId) !== "string" ) error["brandId"] = "Brand ID must be of type string";
+    else if(typeof(brandId) !== "string" ) error["brandId"] = "Brand ID must be of type string";
 
     let isError = !isEmpty(error);
     return {error, isError};
@@ -310,28 +310,34 @@ public validateGetKycDetailsInput = (brandId: string): object =>{
 public validateUpdateKycDetailsInput = (data: KycDetailsUpdateModel): object =>{
     let error = {}
     data.isDefault = String(data.isDefault);
-
+    
     // add necessary validation rules like type | length | required etc
 
     if(isEmpty(data.kycNumber)) error["kycNumber"] = "KYC Number field cannot be left blank";
-    if(typeof(data.kycNumber) !== "string" ) error["kycNumber"] = "KYC Number must be of type string";
-
+    else if(typeof(data.kycNumber) !== "string" ) error["kycNumber"] = "KYC Number must be of type string";
+    
+    
     if(isEmpty(data.kycType)) error["kycType"] = "Kyc Type field cannot be left blank";
-    if(typeof(data.kycType) !== "string" ) error["kycType"] = "Kyc Type must be of type string";
+    else if(typeof(data.kycType) !== "string" ) error["kycType"] = "Kyc Type must be of type string";
+    
 
     if(isEmpty(data.kycName)) error["kycName"] = "Kyc Name field cannot be left blank";
-    if(typeof(data.kycName) !== "string" ) error["kycName"] = "Kyc Name must be of type string";
+    else if(typeof(data.kycName) !== "string" ) error["kycName"] = "Kyc Name must be of type string";
+    
 
     if(isEmpty(data.kycUrl)) error["kycUrl"] = "Kyc Url field cannot be left blank";
-    if(typeof(data.kycUrl) !== "string" ) error["kycUrl"] = "Kyc Url must be of type string";
+    else if(typeof(data.kycUrl) !== "string" ) error["kycUrl"] = "Kyc Url must be of type string";
+    else if(!validator.isURL(data.kycUrl)) error["kycUrl"] = "Kyc Url field must be URL";
+    
 
     if(isEmpty(data.kycStatus)) error["kycStatus"] = "Kyc Status field cannot be left blank";
-    if(typeof(data.kycStatus) !== "string" ) error["kycStatus"] = "Kyc Status must be of type string";
-    if(!validator.isIn(data.kycStatus,["Active","active","Inactive","inactive"])) error["kycStatus"] = 'Kyc Status should be in "Active" or "active" or "Inactive" or"inactive"';
-
-
+    else if(typeof(data.kycStatus) !== "string" ) error["kycStatus"] = "Kyc Status must be of type string";
+    else if(!validator.isIn(data.kycStatus,["Active","active","Inactive","inactive"])) error["kycStatus"] = 'Kyc Status should be in "Active" or "active" or "Inactive" or"inactive"';
+    
+    
     if(isEmpty(data.isDefault)) error["isDefault"] = "IsDefault field cannot be left blank";
-    if(typeof(data.isDefault) !== "string" ) error["isDefault"] = "IsDefault must be of type string";
+    else if(typeof(data.isDefault) !== "string" ) error["isDefault"] = "IsDefault must be of type string";
+    
 
     let isError = !isEmpty(error);
     return {error, isError};

@@ -304,7 +304,7 @@ export const brandRoutes = (
  *                                  kycNumber: "123456789a"
  *                                  kycType: "PAN"
  *                                  kycName: "Kyc Name sample"
- *                                  kycUrl: "kycurl"
+ *                                  kycUrl: "google.com"
  *                                  kycStatus: "Active"
  *                                  isDefault: "true"
  *                              
@@ -407,7 +407,8 @@ export const brandRoutes = (
   *                          example:
   *                                  kycNumber: "123456789a"
   *                                  kycType: "PAN-New"
-  *                                  kycUrl: "kycurl-updated"
+  *                                  kycName: "kyc name"
+  *                                  kycUrl: "google.com"
   *                                  kycStatus: "inactive"
   *                                  isDefault: "true"
   *          responses:
@@ -475,7 +476,7 @@ export const brandRoutes = (
    *                              bankType: "savings"
    *                              ifscCode: "FDCH000234"
    *                              bankName: "New Bank"
-   *                              bankUrl: "bankurl"
+   *                              bankUrl: "google.com"
    *                              bankStatus: "Active"
    *                              isDefault: "true"
    *          responses:
@@ -573,7 +574,7 @@ export const brandRoutes = (
 *                              bankNumber: "123123123"
 *                              bankType: "savings"
 *                              bankName: "New Bank Updated"
-*                              bankUrl: "bankurl"
+*                              bankUrl: "google.com"
 *                              bankStatus: "Active"
 *                              isDefault: "true"
 *          responses:
