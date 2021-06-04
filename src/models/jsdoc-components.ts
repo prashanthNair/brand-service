@@ -156,13 +156,8 @@
  *          buddyRole:
  *            type: string
  *            description: Role of the buddy user
- *      Post_Brand_Subscriptions:
- *        type: object
- *        properties:
- *          subscriptionId:
- *            type: string
- *            description: subscriptionId of the selected subscription
  */
+
 /**
  * @swagger
  *  components:
@@ -307,7 +302,27 @@
  *          status:
  *            type: string
  *            description: Status of the Role
- *         
+ */
+
+ 
+/**
+ * @swagger
+ *  component:
+ *    schemas: 
+ *      Get_products:
+ *        type: object
+ *        properties:
+ *          subCategoryId:
+ *            type: staring
+ *            description: subCategoryId of products
+ *          status: 
+ *             type: string
+ *             description: Current status of products "Active"/"Inactive"
+ */ 
+ /**
+ * @swagger
+ *  components:
+ *    schemas:
  *      Post_Product:
  *        type: object
  *        properties:
@@ -398,16 +413,24 @@
  *          buddyRole:
  *            type: string
  *            description: Role of the buddy
- *         
- *      Get_products:
+ */
+/**
+ * @swagger
+ *  components:
+ *    schemas:
+ *      Post_Brand_Subscriptions:
  *        type: object
  *        properties:
- *          subCategoryId:
- *            type: staring
- *            description: subCategoryId of products
- *          status: 
- *             type: string
- *             description: Current status of products "Active"/"Inactive"
+ *          subscriptionId:
+ *            type: array
+ *            items: 
+ *              type: string              
+ *              description: subscriptionId of the selected subscription
+ */
+/**
+ * @swagger
+ *  components:
+ *    schemas:
  *      Put_Brand_Subscriptions:
  *        type: object
  *        properties:
@@ -415,6 +438,7 @@
  *            type: string
  *            description: ACTIVE or INACTIVE based on subscribing or unsubscribing
  */
+
 /**
  * @swagger
  *  components:
