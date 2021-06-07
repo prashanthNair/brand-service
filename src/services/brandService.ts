@@ -47,7 +47,7 @@ export class BrandService implements IBrandService {
 
     public async update(BrandID:string,updateData: BrandRegisterModel): Promise<Object> {
         try{
-          let sql = `CALL Update_Brand(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+          let sql = `CALL Update_Brand(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
           let result = await db.query(
             sql,[
                 BrandID,

@@ -20,7 +20,7 @@ export const brandRoutes = (
      *           schema:
      *             type: object
      *             properties:
-     *               DomianID:
+     *               DomainID:
      *                 type: string
      *                 description: The Id assigned to specific domian.
      *               CategoryId:
@@ -110,7 +110,7 @@ export const brandRoutes = (
      *               BrandID:
      *                 type: string
      *                 description: The Id assigned to specific brand.
-     *               DomianID:
+     *               DomainID:
      *                 type: string
      *                 description: The Id assigned to specific domian.
      *               CategoryId:
@@ -164,9 +164,6 @@ export const brandRoutes = (
      *               RegisteredType:
      *                 type: string
      *                 description: The type of registration.
-     *               AccountPassword:
-     *                 type: string
-     *                 description: The Password for this account.
      *     responses:
      *       201:
      *         description: Updation successfully retrieved        

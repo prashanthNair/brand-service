@@ -106,8 +106,7 @@ export class BrandController {
             RegisteredType: req.body.RegisteredType
         };
         const result = this.brandService.update(req.body.BrandID,signupData).then(result => {
-            console.log(result);
-            
+            console.log(result); 
             HttpResponseMessage.successResponse(res,result, "Sucessfull");
         }).catch(error => {
             HttpResponseMessage.sendErrorResponse(error, "Transaction Failed");
@@ -125,7 +124,6 @@ export class BrandController {
 
         try {
           const result = await this.brandService.getAllProductCategory(req.params.CategoryId); // :TODO remove hardcode
-          
           if (result) {
             HttpResponseMessage.successResponseWithData(res, "Sucessfull", result);
           } else {
