@@ -8,7 +8,7 @@ const subscriptionRoute = (
 
     /**
     * @swagger
-    * /api/v1/subscriptions/{subscriptionId}:
+    * /subscriptions/{subscriptionId}:
     *   get:
     *     summary: Get particular subscription details.
     *     parameters: 
@@ -35,7 +35,7 @@ const subscriptionRoute = (
 
     /**
     * @swagger
-    * /api/v1/brand/{brandId}/subscriptions:
+    * /brand/{brandId}/subscriptions:
     *   get:
     *     summary: Get all subscriptions associated with the brand.
     *     parameters: 
@@ -65,7 +65,7 @@ const subscriptionRoute = (
 
     /**
     * @swagger
-    * /api/v1/brand/{brandId}/subscriptions:
+    * /brand/{brandId}/subscriptions:
     *   post:
     *     summary: Insert Subscription details to brand_subscription table.
     *     parameters: 
@@ -101,7 +101,7 @@ const subscriptionRoute = (
 
     /**
     * @swagger
-    * /api/v1/brand/{brandId}/subscriptions/{subscriptionId}:
+    * /brand/{brandId}/subscriptions/{subscriptionId}:
     *   put:
     *     summary: Update subscription details of a brand from brand_subscription table.
     *     parameters: 

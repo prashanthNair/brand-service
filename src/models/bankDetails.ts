@@ -4,12 +4,21 @@ export class Details {
     Ifsc: string;    
 }
 export class BankDetails {
-    BrandId: string;
-    BankType: string;
-    BankName: string;
-    IfscCode: string;
-    BankUrl: string;
-    BankStatus: string;
-    IsDefault: string;
-    BankNumber: string;
+    brandId: string;
+    bankType: string;
+    bankName: string;
+    ifscCode: string;
+    bankUrl: string;
+    bankStatus: string;
+    isDefault: string;
+    bankNumber: string;
+}
+
+export class UpdateBankDetails{
+    bankNumber: string;
+    bankType: string;
+    bankName: string;
+    bankUrl: string;
+    bankStatus: string;
+    isDefault: string;
 }

@@ -1,4 +1,4 @@
-import { Product } from "../models/product";
+import { GetAllProductsInput, GetBrandProductInput, Product } from "../models/product";
 import { IProductService } from "./IProductService";
 import { db } from "../configuration/db.config";
 import { integer } from "aws-sdk/clients/cloudfront";
@@ -29,17 +29,17 @@ class ProductService implements IProductService {
     }
   }
 
-  public getProducts(input: object): Promise<Product> {
+  public getProducts(input: GetAllProductsInput): Promise<Product> {
 
-    let sql = `CALL GetAllProducts(?,?,?)`;
+    let sql = `CALL GetAllProducts(?,?)`;
     return db.query(sql, Object.values(input));
 
   }
   
-  public getProduct(brandId: string, productId: string): Promise<Product> {
+  public getProduct(input: GetBrandProductInput): Promise<Product> {
 
       let sql = `CALL Get_Product(?,?)`;
-      return db.query(sql, [brandId, productId]);
+      return db.query(sql, Object.values(input));
 
   }
 

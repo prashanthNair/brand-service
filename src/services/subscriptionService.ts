@@ -1,5 +1,5 @@
 import { db } from '../configuration/db.config';
-import { PostBrandSubscription } from '../models/subscription';
+import { PostBrandSubscription, PostBrandSubscriptionSP, UpdateBrandSubscription } from '../models/subscription';
 import { ISubscriptionService } from './ISubscriptionService';
 
 
@@ -28,14 +28,14 @@ class SubscriptionService implements ISubscriptionService{
 
     }
 
-    public postBrandSubscription(brandSubData: PostBrandSubscription): Promise<any>{
+    public postBrandSubscription(brandSubData: PostBrandSubscriptionSP): Promise<any>{
 
-            let sql = `CALL Insertbrandsubscription(?,?,?)`;
+            let sql = `CALL Insertbrandsubscription(?,?)`;
             return db.query(sql, Object.values(brandSubData));
 
     }
 
-    public updateBrandSubscription(brandSubData: PostBrandSubscription): Promise<any> {
+    public updateBrandSubscription(brandSubData: UpdateBrandSubscription): Promise<any> {
 
         let sql = `CALL Updatebrandsubscription(?,?,?)`;
         return db.query(sql, Object.values(brandSubData));

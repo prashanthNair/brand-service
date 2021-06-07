@@ -8,7 +8,7 @@ const productRoute = (
 
     /**
     * @swagger
-    * /api/v1/brand/{brandId}/products:
+    * /brand/{brandId}/products:
     *   post:
     *     summary: Reginster new product under a brand.
     *     requestBody:
@@ -36,7 +36,7 @@ const productRoute = (
 
     /**
     * @swagger
-    * /api/v1/brand/{brandId}/products:
+    * /brand/{brandId}/products:
     *   get:
     *     summary: Get details of all products associated with the brand.
     *     parameters:
@@ -44,12 +44,6 @@ const productRoute = (
     *         name: brandId
     *         required: true
     *         description: brandId of the brand
-    *         schema:
-    *           type: string
-    *       - in: query
-    *         name: productType
-    *         required: true
-    *         description: productType of the products, default is "Exclusive"
     *         schema:
     *           type: string
     *       - in: query
@@ -77,7 +71,7 @@ const productRoute = (
 
     /**
     * @swagger
-    * /api/v1/brand/{brandId}/products/{productId}:
+    * /brand/{brandId}/products/{productId}:
     *   get:
     *     summary: Get details of specific product.
     *     parameters:
