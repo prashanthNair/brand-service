@@ -1,10 +1,9 @@
 import { db } from "../configuration/db.config";
 import { BankDetails, UpdateBankDetails } from "../models/bankDetails";
 import { BrandRegisterModel } from "../models/brandRegisterModel";
-import { BrandOrdersResponseModal } from "../models/orderListModel";
+import { BrandOrdersResponseModal, getAllOrdersModel } from "../models/orderListModel";
 import { KycDetails, KycDetailsUpdateModel } from "../models/kycDetails";
 import { IBrandService } from "./IBrandService";
-import { getAllOrdersModel } from "../models/orderListModel";
 
 
 export class BrandService implements IBrandService {
@@ -226,7 +225,6 @@ export class BrandService implements IBrandService {
 
       return result;
     } catch (err){
-      console.log(err,"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
       return err;
     }
   }

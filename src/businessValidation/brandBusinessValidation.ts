@@ -348,9 +348,6 @@ public validateUpdateKycDetailsInput = (data: KycDetailsUpdateModel): object =>{
 public validateGetAllOrdersInput = (data : getAllOrdersModel) : object =>{
   let error = {};
 
-  console.log(data,"///////////////////////////////////////////");
-  
-
     if(isEmpty(data.brandId)) error["brandId"] = "Brand ID field cannot be left blank";
     else if(typeof(data.brandId) !== "string" ) error["brandId"] = "Brand ID must be of type string";
 

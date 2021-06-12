@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import app from "../app";
 import { BrandController } from "../controllers/brandController";
 
 
