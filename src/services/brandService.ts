@@ -1,8 +1,10 @@
 import { db } from "../configuration/db.config";
 import { BankDetails, UpdateBankDetails } from "../models/bankDetails";
 import { BrandRegisterModel } from "../models/brandRegisterModel";
+import { BrandOrdersResponseModal } from "../models/orderListModel";
 import { KycDetails, KycDetailsUpdateModel } from "../models/kycDetails";
 import { IBrandService } from "./IBrandService";
+import { getAllOrdersModel } from "../models/orderListModel";
 
 
 export class BrandService implements IBrandService {
@@ -208,6 +210,24 @@ export class BrandService implements IBrandService {
       return rows;
     } catch (error) {
       return null;
+    }
+  }
+
+
+  public async getAllOrders(getAllOrdersData : getAllOrdersModel): Promise<BrandOrdersResponseModal>{
+    try {
+
+      let sql =`CALL GetPendingAndConfirmedOrder(?,?)`;
+
+      const result = await db.query(sql, Object.values(getAllOrdersData));
+
+      
+
+
+      return result;
+    } catch (err){
+      console.log(err,"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+      return err;
     }
   }
 }

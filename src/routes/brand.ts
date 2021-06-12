@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import app from "../app";
 import { BrandController } from "../controllers/brandController";
 
 
@@ -594,4 +595,46 @@ app
            await brandController.updateBankDetails(req,res,next);
        }
    )
+
+/**
+*  @swagger
+*  
+*      /brand/{brandId}/orders/{orderStatus}:
+*      get:
+*          summary: Get all orders of brand 
+*          description: Get all orders of brand corresponding order status
+*          parameters:
+*                - in: path
+*                  name: brandId
+*                  required: true
+*                  description: BrandId of the Brand
+*                  schema:
+*                      type: string
+*                      example: B100000011
+*                - in: path
+*                  name: orderStatus
+*                  required: true
+*                  description: Status of the Order
+*                  schema:
+*                      type: string
+*                      example: APPROVED_ORDER
+*          responses:
+*              200:
+*                  description: Brand Order Details fetched Sucessfully
+*              400:
+*                  description: BAD_REQUEST ( Validation error )
+*              500:
+*                  description: Brand Order Details fetching Failed
+* 
+*/
+
+app
+  .route('/api/v1/brand/:brandId/orders/:orderStatus')
+  .get(
+      async (req: Request, res: Response, next: NextFunction)=>{
+        await brandController.getAllOrders(req,res,next);
+      }
+  ) 
 }
+
+

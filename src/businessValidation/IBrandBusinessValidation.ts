@@ -7,4 +7,5 @@ export interface IBrandBusinessValidation {
     validatePostKycDetailsInput(data: object): object;
     validateGetKycDetailsInput(data: string): object;
     validateUpdateKycDetailsInput(data: object): object;
+    validateGetAllOrdersInput(data: object): object;
 }

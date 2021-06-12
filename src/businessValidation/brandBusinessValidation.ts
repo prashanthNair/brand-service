@@ -3,6 +3,7 @@ import { BrandRegisterModel } from "../models/brandRegisterModel";
 import { BrandUpdateModel } from "../models/brandUpdateModel";
 import { BankDetails, UpdateBankDetails } from "../models/bankDetails";
 import { KycDetails, KycDetailsUpdateModel } from "../models/kycDetails";
+import {getAllOrdersModel} from "../models/orderListModel";
 import { IBrandBusinessValidation } from "./IBrandBusinessValidation";
 import { isEmpty } from './isEmpty';
 
@@ -338,6 +339,24 @@ public validateUpdateKycDetailsInput = (data: KycDetailsUpdateModel): object =>{
     if(isEmpty(data.isDefault)) error["isDefault"] = "IsDefault field cannot be left blank";
     else if(typeof(data.isDefault) !== "string" ) error["isDefault"] = "IsDefault must be of type string";
     
+
+    let isError = !isEmpty(error);
+    return {error, isError};
+}
+
+
+public validateGetAllOrdersInput = (data : getAllOrdersModel) : object =>{
+  let error = {};
+
+  console.log(data,"///////////////////////////////////////////");
+  
+
+    if(isEmpty(data.brandId)) error["brandId"] = "Brand ID field cannot be left blank";
+    else if(typeof(data.brandId) !== "string" ) error["brandId"] = "Brand ID must be of type string";
+
+    if(isEmpty(data.status)) error["orderStatus"] = "Order Status field cannot be left blank";
+    else if(typeof(data.status) !== "string" ) error["orderStatus"] = "Order Status must be of type string";
+    else if(!validator.isIn(data.status,["PENDING_APPROVAL","APPROVED_ORDER"])) error["orderStatus"] = 'Order Status should be in "PENDING_APPROVAL" or "APPROVED_ORDER"';
 
     let isError = !isEmpty(error);
     return {error, isError};

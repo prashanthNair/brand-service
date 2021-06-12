@@ -260,7 +260,7 @@ export class BrandController {
       }
 
       const result = await this.brandService.updateKycDetails(KycDetailsInputModel);
-      
+
 
       if (result) {
         HttpResponseMessage.successResponse(res, "Kyc Details updated Sucessfully");
@@ -271,9 +271,9 @@ export class BrandController {
   }
 
   public async postBankDetails(req: Request, res: Response, next: NextFunction) {
-    const brandId : string = req.params.brandId;
+    const brandId: string = req.params.brandId;
     //validate api inputs
-    let { error, isError } = this.validator.validatePostBankDetailsInput({...req.body, brandId});
+    let { error, isError } = this.validator.validatePostBankDetailsInput({ ...req.body, brandId });
 
     if (isError) {
       HttpResponseMessage.validationErrorWithData(res, "input validation error", error)
@@ -291,7 +291,7 @@ export class BrandController {
       };
 
       const result = await this.brandService.postBankDetails(bankDetailsInputModel);
-      
+
 
       if (!result.errno) {
         HttpResponseMessage.successResponse(res, "Bank Account Details inserted Sucessfully");
@@ -386,6 +386,33 @@ export class BrandController {
       }
     } catch (err) {
       HttpResponseMessage.sendErrorResponse(res, err);
+    }
+  }
+
+  public async getAllOrders(req: Request, res: Response, next: NextFunction) {
+    try {
+
+      const brandId = req.params.brandId;
+      const status = req.params.orderStatus;
+
+      let { error, isError } = this.validator.validateGetAllOrdersInput({brandId,status});
+
+
+      if (isError) {
+        HttpResponseMessage.validationErrorWithData(res, "input validation error", error)
+      } else {
+
+        const result = await this.brandService.getAllOrders(brandId, status);
+
+        if (!result.errno) {
+          HttpResponseMessage.successResponseWithData(res, "Fetched All Orders Successfully", result);
+        } else {
+          HttpResponseMessage.sendErrorResponse(res, "Fetched All Orders Failed");
+        }
+      }
+
+    } catch (err) {
+      HttpResponseMessage.sendErrorResponse(res, "Fetching All Orders is Failed", err);
     }
   }
 }
