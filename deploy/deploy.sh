@@ -4,8 +4,8 @@
 set -e
 # Lets write the public key of our aws instance
 eval $(ssh-agent -s)
-echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-
+# echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+[ -z $SSH_AUTH_SOCK ] && `eval ssh-agent` && echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
 
 # disable the host key checking.
 # ./deploy/disableHostKeyChecking.sh
