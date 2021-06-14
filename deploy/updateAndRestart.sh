@@ -14,7 +14,7 @@ git clone https://gitlab.com/migobucks_personal/migobucksbrandservice.git
  
 cd /home/ubuntu/migobucksbrandservice
 
-sudo fuser -k 2000/tcp
+# sudo fuser -k 2000/tcp
 #install npm packages
 echo "Running npm install"
 npm install
