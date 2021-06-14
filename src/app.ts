@@ -29,12 +29,7 @@ class App {
 
     private config(): void {
         this.app.use(cors());
-        this.app.options('*', cors());
-        this.app.use((request, response, next) => {
-            response.header("Access-Control-Allow-Origin", "*");
-            response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-            next();
-        });
+        this.app.options('*', cors());       
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: false }));
         const swaggerSpec = swaggerJSDoc(this.JSDocOptions);
