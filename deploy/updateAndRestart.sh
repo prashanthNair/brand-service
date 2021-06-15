@@ -17,8 +17,8 @@ git clone https://gitlab.com/migobucks_personal/migobucksbrandservice.git
 #If you are not using nvm, add the actual path like
 # PATH=/home/ubuntu/node/bin:$PATH
 echo "/home/ubuntu/.nvm/nvm.sh"
-
-source /home/ubuntu/.nvm/nvm.sh
+# cat ~/home/ubuntu/.nvm/nvm.sh
+# source /home/ubuntu/.nvm/nvm.sh
 
 echo "Kill the previous pm2"
 # stop the previous pm2
