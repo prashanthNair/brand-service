@@ -1,5 +1,5 @@
 import { db } from "../configuration/db.config";
-import { BankDetails } from "../models/bankDetails";
+import { BankDetails, UpdateBankDetails } from "../models/bankDetails";
 import { BrandRegisterModel } from "../models/brandRegisterModel";
 import { KycDetails, KycDetailsUpdateModel } from "../models/kycDetails";
 import { IBrandService } from "./IBrandService";
@@ -164,7 +164,43 @@ export class BrandService implements IBrandService {
     } catch (err) {
       return err;
     }
+
   }
+
+
+  public async getBankDetails(brandId: string): Promise<BankDetails> {
+    try {
+
+      let sql = `CALL GetBankDetails(?)`;
+      let result = await db.query(sql, brandId)
+
+      return result;
+
+    } catch (err) {
+      console.log(err);
+
+      return err;
+    }
+  }
+
+  public async updateBankDetails(updateBankDetailsData: UpdateBankDetails): Promise<BankDetails> {
+    try {
+      let sql = `CALL Updatebankdetails(?,?,?,?,?,?)`;
+      let result = await db.query(sql, Object.values(updateBankDetailsData))
+
+      console.log(updateBankDetailsData, result[0], "---------------------------------------------------------------------------");
+      return result;
+
+
+
+
+    } catch (err) {
+      console.log(err);
+
+      return err;
+    }
+  }
+
   public async getAllSubscriptions(): Promise<BrandRegisterModel> {
     try {
       let sql = `CALL Getallsubscriptions`;

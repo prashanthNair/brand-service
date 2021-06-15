@@ -4,6 +4,11 @@ export class subscription{
 
 export class PostBrandSubscription{
     brandId: string;
+    subscriptionId: [string];
+}
+
+export class PostBrandSubscriptionSP{
+    brandId: string;
     subscriptionId: string;
 }
 
