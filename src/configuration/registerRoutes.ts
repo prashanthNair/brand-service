@@ -10,6 +10,5 @@ export default function registerRoutes(app) {
     authRoutes(app);
     brandRoutes(app); 
     productRoute(app)
-    subscriptionRoute(app) 
-
+    subscriptionRoute(app);
 }
