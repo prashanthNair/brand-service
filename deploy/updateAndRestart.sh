@@ -42,7 +42,7 @@ echo "Running npm install"
 npm install
 
 #Kill the Process
-# kill -9 $(lsof -t -i:3000)
+ sudo kill -9 `sudo lsof -t -i:3000`
 
 #Restart the node server
 npm run build
