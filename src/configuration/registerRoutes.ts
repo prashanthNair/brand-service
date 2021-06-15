@@ -6,7 +6,7 @@ var cors = require('cors')
 
 
 export default function registerRoutes(app) {
-    this.app.options('*', cors());       
+    app.options('*', cors());       
     authRoutes(app);
     brandRoutes(app); 
     productRoute(app)
